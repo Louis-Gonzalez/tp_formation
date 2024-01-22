@@ -28,7 +28,7 @@
     </div>
 </template>
 
-<style scoped> /*  je n'appliqu aucun stcle css*/
+<style scoped> /*  je n'applique aucun stcle css*/
 
 </style>
 
