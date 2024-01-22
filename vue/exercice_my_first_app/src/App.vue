@@ -1,13 +1,13 @@
 
 
 <script setup>
-import ComponentSeraphin from './components/component.vue'
+import ComponentSeraphin from './components/ComponentSeraphin.vue'
 
 </script>
 
 <template>
-  <chubakakaka/>
-  <chubakakaka msg="coucou"/>  
+  <ComponentSeraphin/>
+  <ComponentSeraphin msg="coucou"/>  
 </template>
 
 <style scoped>
