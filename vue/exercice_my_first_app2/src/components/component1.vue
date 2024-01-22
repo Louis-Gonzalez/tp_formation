@@ -1,4 +1,4 @@
-<script setup>
+<script>
     export default {
     name: "seraphin", // je donne le nom "seraphin" à mon composant 
 
@@ -18,18 +18,18 @@
             this.aie = this.aie+1 // je lui dis de faire aie+1
             }
         }
-    };
+    }
 </script>
 
 <template>
     <div>
-        <p>{{ msg }} {{aie}}</p>
-        <button @click="ajouteAie"> Cliquez-moi et j'ajoue 1 aie en + </button>
+        <p>{{ msg }} {{aie}}</p>  <!-- ceci crée un paragraphe dans le lequel j'affiche le message "msg" et le "aie"-->
+        <button @click="ajouteAie"> Cliquez-moi et j'ajoue 1 aie en + </button> <!-- je crée mon bouton avec la surveillance du click via @click et je lui dis de faire la fonction ajouteAie-->
     </div>
 </template>
 
-<style scoped>
+<style scoped> /*  je n'appliqu aucun stcle css*/
 
 </style>
-<script>
+
 
