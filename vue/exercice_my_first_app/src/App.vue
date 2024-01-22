@@ -1,7 +1,7 @@
 
 
 <script setup>
-import chubakakaka from './components/component.vue'
+import ComponentSeraphin from './components/component.vue'
 
 </script>
 
