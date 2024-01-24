@@ -29,11 +29,10 @@ export default {
     methods: {
         emitDeleteProduct(product) {
 
-            this.$emit("deleteProduct", product)
-            /* 
-            ici vous emettrez l'événement et le payload
-            qui permettra au composant parent de supprimer
-            le produit de la liste
+            this.$emit("deleteProduct", product) /*/ j'appelle le listener personnalisé au nom de "deleteProduct" sur le product
+            ceci emet l'événement au composant parent  et charge le message via "le payload" 
+            qui permettra au composant parent de faire l'action de demander par la fonction supprimer
+            qui supprime de la liste product, la ligne concerné dans le parent : le produit est supprimé
             */
         },
         emitEditerProduct(product) {
@@ -98,7 +97,7 @@ export default {
                         <button 
                             class="btn btn-warning m-2"
                             @click ="emitDeleteProduct(item.id)"
-                        ><!-- ici, on écoute le bouton, au clicl, on lance la fonctin emitDeleteProduct avec le parametre item.id -->
+                        ><!-- ici, on écoute le bouton, au click, on lance la fonction emitDeleteProduct avec le parametre item.id -->
                             Supprimer
                         </button>
                         <!-- Ajouter un bouton de suppression d'un produit -->
