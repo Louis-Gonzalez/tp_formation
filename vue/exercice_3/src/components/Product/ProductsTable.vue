@@ -3,7 +3,9 @@ export default {
     name: 'ProductsTable',
     data() {
         return {
-            nothing: null
+            nothing: null,
+            
+
         }
     },
     props: {

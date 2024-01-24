@@ -127,7 +127,9 @@ export default {
       <!-- Injecter ici les données dans le slot default du composant main-layout --> 
       <!-- Injection dans le Slot default ( dans le <template #default> ) qui se trouve dans main-layout <slot>...... </slot> -->
       <!-- le contenu chargé dans le slot par défaut est le contenu du template #default de App.vue -->
-      <section class="d-flex wrap">
+      <section
+        v-if="toggle"
+        class="d-flex wrap">
         <section class="col-6">
           <h2 class="w-f">Product Form</h2>
           <form @submit.prevent="submitForm">
@@ -178,7 +180,7 @@ export default {
         </section>
         <products-table
           class="col-6"
-          :products="products"  
+          :products="products" 
         />
       </section>
   </template>
