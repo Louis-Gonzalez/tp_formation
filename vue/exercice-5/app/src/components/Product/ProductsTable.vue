@@ -4,10 +4,9 @@ Ajouter un événement deleteProduct
 Transmettre les données au composant parent 
 */
 
-
 export default {
     name: 'ProductsTable',
-    emits: ['deleteProduct', 'addProductBask', 'editProduct'],
+    emits: ["editProduct", "deleteProduct"],
     data() {
         return {
             nothing: null
@@ -28,19 +27,12 @@ export default {
         }
     },
     methods: {
-        emitDeleteProduct(product) {
-            this.$emit("deleteProduct", product) /*/ j'appelle le listener personnalisé au nom de "deleteProduct" sur le product
-            ceci emet l'événement au composant parent  et charge le message via "le payload" 
-            qui permettra au composant parent de faire l'action de demander par la fonction supprimer
-            qui supprime de la liste product, la ligne concerné dans le parent : le produit est supprimé
-            */
-        },
-        emitAddProductBask(product) {
-            this.$emit("addProductBask", product)
-        },
         emitEditProduct(product) {
             this.$emit("editProduct", product)
         },
+        emitDeleteProduct(product) {
+            this.$emit("deleteProduct", product)
+        }
     },
     computed: {
         vtaCalculation: () => (price, vta) => {
@@ -78,9 +70,9 @@ export default {
             </thead>
             <tbody class="table-group-divider">
                 <tr 
-                    v-for="(item, index) in products"
+                    v-for="item in products"
                     :key="item.id"
-                ><!-- le paramètre item représente le product-->
+                >
                     <td>{{ item.name }}</td>
                     <td>{{ item.category }}</td>
                     <td>
@@ -92,36 +84,24 @@ export default {
                     <td>{{ item.vta }} %</td>
                     <!-- Appel à une fonction computed -->
                     <td>{{ vtaCalculation(item.price, item.vta) }} €</td>
-                    <td class="box-button d-flex flex-wrap justify-content-center">
+                    <td>
                         <button 
-                            class="btn btn-danger m-2"
-                            @click ="emitDeleteProduct(item.id)"
-                        ><!-- ici, on écoute le bouton, au click, on lance la fonction emitDeleteProduct avec le parametre item.id -->
-                            Delete
+                            class="btn btn-primary"
+                            @click="emitEditProduct(item)"
+                        >
+                            Éditer
                         </button>
                         <!-- Ajouter un bouton de suppression d'un produit -->
                         <!-- au clic, appel de la fonction emitDeleteProduct(product) -->
                         <button 
-                            class="btn btn-primary m-2"
-                            @click = "emitEditProduct(item)"
+                            class="btn btn-danger"
+                            @click="emitDeleteProduct(item)"
                         >
-                            Edit
+                            Supprimer
                         </button>
-                        <button 
-                            class="btn btn-success m-2"
-                            @click = "emitAddProductBask(item)"
-                        >
-                            Add bask
-                        </button>
-
                     </td>
                 </tr>
             </tbody>
         </table>
     </section>
 </template>
-
-<style scoped>
-
-
-</style>
