@@ -1,19 +1,35 @@
 [
-
     {
         "id": 1,
-        "name": "Biscuit",
+        "name": "Skitlle",
         "category": "Confiserie",
-        "description": "Des super Biscuit Trop bon",
+        "description": "c'est les meilleurs bonbons du monde; vive l'arc en ciel",
         "price": 1,
         "vta": 20
-    },
+    }, 
     {
         "id": 2,
         "name": "Rhum",
         "category": "Boisson",
-        "description": "Y'a bon !",
+        "description": "Le Rhum y a pas bon mé, mé y bois quand même !",
+        "price": 21,
+        "vta": 20
+    },
+    {
+        "id": 3,
+        "name": "Sirop Canne",
+        "category": "Boisson",
+        "description": "Du sucre, du sucre !",
         "price": 10,
+        "vta": 20
+    },
+    {
+        "id": 4,
+        "name": "Tarte à la courgette",
+        "category": "Légume",
+        "description": "C'est pas bon hein !",
+        "price": 5,
         "vta": 20
     }
 ]
+

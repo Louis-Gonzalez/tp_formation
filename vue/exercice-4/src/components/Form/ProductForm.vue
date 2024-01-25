@@ -3,6 +3,7 @@
         name: 'ProductForm',
         emits: ['addProduct'],
         emits: ['deleteProduct'],
+        emits: ['addProductBask'],
         
         /* Utilisation d'un hook du cycle de vie du composant */
         mounted() {
@@ -111,7 +112,7 @@
             </textarea>
           </div>
           
-          <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-secondary" type="submit">Save</button>
         </form>
     </section>
 

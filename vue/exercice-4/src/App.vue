@@ -3,7 +3,10 @@ import MainLayout from './components/Layout/MainLayout.vue'
 import MainNav from './components/Layout/MainNav.vue'
 import ProductForm from "./components/Form/ProductForm.vue"
 import ProductsTable from "./components/Product/ProductsTable.vue"
+import ProductsBask from './components/Product/ProductsBask.vue'
 import products from "./data/productList.json"
+
+
 /* Importation des données depuis un fichier json - La conversion est automatique (fait) */
 
 
@@ -13,10 +16,13 @@ export default {
     MainLayout,
     MainNav,
     ProductForm,
-    ProductsTable
-  },
+    ProductsTable,
+    ProductsBask,
+    ProductsBask
+},
   data() {
     return {
+      ProductsBask: [],
       userNavItemsArray : [
         {
           name: "Settings",
@@ -56,7 +62,7 @@ export default {
           ],
           target: "_self",
           class: "link-body-emphasis"
-        }
+        },
       ],
       /* On lie les données importées depuis le fichier JSON */
       products: products
@@ -71,6 +77,11 @@ export default {
     console.log(product) // cela renvoie un intégeur
     /* Ici on va parcourir le tableau products et supprimer le produit transmis */
       this.products = this.products.filter( (item) => item.id != product)  // ici je filtre le tableau et je réassigne à la valeur products
+    },
+    addProductBask(product) {
+      console.log(product) // cela renvoie un produit entier  "Product"
+      this.ProductsBask.push(product) 
+      console.log(this.ProductsBask)
     }
   }
 }
@@ -90,6 +101,7 @@ export default {
       <!-- insérer un écouter d'évènement personnalisé qui appel la focntion addProduct -->
       <product-form
         @addProduct="addProduct"
+        @addProductBask="addProductBask"
         class="col-6"
       />
       <!-- 
@@ -101,10 +113,15 @@ export default {
         class="col-6"
         @deleteProduct = "deleteProduct"
         :products="products"
-        
-      />
+        @addProductBask = "addProductBask"
+      /> <!-- ici on écoute le bouton "addProductBask" dans le products-table -->
     </section>
-  
+    <template #footer>
+      <products-bask
+        class="col-6"
+        :productsBask="ProductsBask"
+      /> <!-- ici on écoute le bouton "addProductBask" dans le products-table -->
+    </template>
   </main-layout>
 </template>
 

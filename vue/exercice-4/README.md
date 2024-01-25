@@ -7,7 +7,7 @@
 - Utilisation d'un fichier JSON pour importer vos produits et catégorie  
 
 ** Compléter le CRUD de Produit **
-- Supprimer un nouveau produit
+- Supprimer un nouveau produit (fait)
 - Voir un nouveau produit (bonus)
 - Éditer un nouveau produit (bonus)
 
