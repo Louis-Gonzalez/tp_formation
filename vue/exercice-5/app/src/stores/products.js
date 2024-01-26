@@ -1,60 +1,69 @@
-import { defineStore } from 'pinia' // permet de définir un store
+import { defineStore } from 'pinia'
+/* Importation des données depuis un fichier json - La conversion est automatique */
+/* import products from "../data/productList.json" */
+/* @ est un raccourcis pour partir du dossier src */
+import products from "@/data/productList.json"
 
-/* Importation des données depuis un fichier json - La conversion est automatique 
-@ est un raccoucir pour partir du dossier src soit on pourrait écrire :
-import products from "@/data/producList.json" */
+const STORE_NAME = 'products'
+const STORE_LOCALE_STORRAGE_KEY = 'products'
 
-import products from "../data/productList.json"
+const getDefaultState = () => products
 
+const getCurrentState = () => {
+const localeData = localStorage.getItem(STORE_LOCALE_STORRAGE_KEY)
 
-/* attention dans le nommage est sous convention de la constante 
-on doit l'écrire de la manière suivante : 
- "use" + "le nom du store" + "Store" */
+return localeData ? JSON.parse(localeData) : getDefaultState()
+}
 
-export const useProductsStore = defineStore('products', {
-    // écrire ses options... 
-    //première partie :  state qui sera data
-    state: () => { // veut dire état et la valeur de la donnée
-        return {
-            products: products, // veut dire état et la valeur de la donnée
-            editProductMode: false,
-            productToEdit: null,
-        }
+export const useProductsStore = defineStore(STORE_NAME, {
+    state: () => {
+      return {
+        products: getCurrentState(),
+        editProductMode: false,
+        productToEditId: null
+      }
     },
-    // deuxième partie : getters : sera les méthodes, les emits, ...
-    // on pourrait écrire (chuby) => chuby.products
-    // ça sert recuper la donnée
     getters: {
-        getProducts : (state) => state.products, // on recupère l'objet product dans state
-        getEditProductMode: (state) => state.editProductMode, //  on récupère l'objet editProductMode dans le state
-        getProductById: (state) => (id) => { // on recupère l'objet product correspond à l'id en paramètre  
-            return state.products.find(product => product.id === id) // qui est ciblé par le find dans state.product 
-        } // on pourrait remplacer le mot product par element : soit (element => element.id === id)
-    }, 
+      getProducts : (state) => state.products,
+      getEditProductMode : (state) => state.editProductMode,
+      getProductToEditId: (state) => state.productToEditId,
+      getProductById: (state) => (id) => {
+        return state.products.find(product => product.id === id)
+      }
+    },
     actions: {
-        addProduct(product) { 
-            this.products.push(product)
-        },
-        updateProduct(product) {
-            const index = this.products.findIndex(el => {
-                return el.id === product.id
-            })
-            this.products[index] = product
-            this.resetEditionMode ()
-        },  // ici c'est l'équivalent du playload
-            // l'utlisation de cette donnée soit la mutation 
-        setEditProductMode (mode){
-            this.editProductMode = mode // permet de changer le statut de mode false par default et le changer 
-        },
-        setProductToEditId (id){
-            this.productToEditId = id // permettre de savoir quel est son id
-        },
-        resetEditionMode (){
-            this.productToEditId = null // reéassigne la valeur à null l'id de productEditId
-            this.editProductMode = false // réasigne la valeur false à editProductMode à false
-        }
-    } 
-})
-
-/* la fonction defineStore est une fonction par défaut qui utilisaera
-les données de products avec ses options  */
+      upDateLocalStorage (){
+        localStorage.setItem(STORE_LOCALE_STORRAGE_KEY, JSON.stringify(this.products))
+      },
+      addProduct(product) {
+        this.products.push(product)
+        this.upDateLocalStorage()
+      },
+      updateProduct(product) {
+        console.log("update in store", product)
+        const index = this.products.findIndex(el => {
+            return el.id === product.id
+        })
+        this.products[index] = product
+        this.upDateLocalStorage()
+        this.resetEditionMode()
+      },
+      deleteProduct(productId) {
+        /* Ici on va parcourir le tableau products et supprimer le produit transmis */
+        this.products = this.products.filter(el => el.id != productId)
+        this.upDateLocalStorage()
+      },
+      setEditProductMode(mode) {
+        console.log("mode Edition : ", mode)
+        this.editProductMode = mode
+      },
+      setProductToEditId(id) {
+        console.log("Product Id : ", id)
+        this.productToEditId = id
+      },
+      resetEditionMode() {
+        this.productToEditId = null
+        this.editProductMode = false 
+      }
+    }
+  })
