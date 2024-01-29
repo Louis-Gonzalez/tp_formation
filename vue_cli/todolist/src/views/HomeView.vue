@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Seraphin Todolist" />
-    <MyForm />
+    <MyForm @creerTaches="ajouterTaches"/>
   </div>
 </template>
 
@@ -10,7 +10,8 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import MyForm from '@/components/MyForm.vue';
-import TacheAExecuter from '@/components/TacheAExecuter.vue'
+import tableauTacheschuby from '@/services/TableauDeTaches.js'
+import TacheAExecuter from '@/components/TacheAExecuter.vue';
 
 export default {
   name: "HomeView",
@@ -19,5 +20,15 @@ export default {
     MyForm,
     TacheAExecuter,
   },
+  setup() {
+    function ajouterTaches(payload){
+      console.log("Home.vue ajouterTaches", payload)
+      // utilise la valeur via l'export et on ajoute sa méthode .ajouterTableauTaches avec l'argument payload
+      tableauTacheschuby.create(payload);
+    }
+
+    return { ajouterTaches: ajouterTaches}
+  }
 };
+
 </script>

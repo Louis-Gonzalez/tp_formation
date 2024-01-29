@@ -1,18 +1,13 @@
+<template>
+  
+</template>
+
 <script>
-
 export default {
-    name: "TacheAExecuter",
-    data() {
-        return {
-            
-        }
-    },
-    Methods: {
 
-} 
 }
 </script>
 
-<template>
+<style>
 
-</template>
+</style>
