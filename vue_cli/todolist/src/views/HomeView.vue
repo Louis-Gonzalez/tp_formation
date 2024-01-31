@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/logo.png" width="200px" height="auto" />
     <HelloWorld msg="Welcome to Seraphin Todolist" />
     <MyForm @creerTaches="ajouterTaches"/>
   </div>

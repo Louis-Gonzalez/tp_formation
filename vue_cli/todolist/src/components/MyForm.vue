@@ -8,6 +8,7 @@ export default {
     setup(props, context) { // le paramètre context apporte la méthode "emit"
         // ici on crée la constante pour stocker les valeurs de l'obejt qui aura une propreité value retourné depuis input nomDeLaTache
         // après il faut associé le nom de la constante avec le template, idem pour les autres valeurs ci-dessous
+        const tabTaches = ref([]);
         const nomDeLaTache = ref(""); 
         // ici on crée la constante pour stocker les valeurs de l'obejt qui aura une propreité value retourné depuis input descriptionTache
         const descriptionTache = ref("");
@@ -16,17 +17,17 @@ export default {
             { // description du premier choix 
                 id: 1,
                 nom: "court terme",
-                value: "short-term",
+                value: "court terme",
             },
             { // deuxième choix
                 id: 2,
                 nom: "moyen terme",
-                value: "medium-term",
+                value: "moyen terme",
             },
             { // troisième choix
                 id: 3,
                 nom: "long terme",
-                value: "long-term",
+                value: "long terme",
             },
         ]);
         // ici on crée la constante pour stocker l'objet qui aura une propreité value retourné au choix
@@ -42,17 +43,20 @@ export default {
             console.log("My Form taches :", taches);
             context.emit('creerTaches', taches); // ici on emet une info qui va remonter vers le component parent et taches est le payload
             majForm(); // réinitialisation du form, par contre on est en compostion , nous n'avons pas besoin du this.majForm()
+            tabTaches.value.push(taches)
         }
         function majForm(){ // fonction réinitialise les valeurs du form
             nomDeLaTache.value =""; // ceci renvoie à la valeur de l'input du form 
             descriptionTache.value = "";
             temporaliteChosit.value = "";
         }
-        
 
+        /* function supprimerTache(){
+            
+        }*/
         // on a ecrit la forme raccourci sinon il faudrait ecrire {nomDeLaTache : nomDeLaTache, 
         // etc ... sous le format clé/valeur et on ajoute la fonction soummettreTache}
-        return { nomDeLaTache, descriptionTache, temporaliteTypes, temporaliteChosit, soumettreTache }; 
+        return { nomDeLaTache, descriptionTache, temporaliteTypes, temporaliteChosit, soumettreTache, tabTaches }; 
         // à partir d'ici, on peut réutiliser ces variables ailleurs et surtout dans le template
     },
     /*data() { // ici on a pas besoin de data car on est en composition le setup fait le boulot
@@ -100,14 +104,31 @@ export default {
                 <option v-for="tempo in temporaliteTypes" :key="tempo.id" :value="tempo.value">{{ tempo.nom }}</option>
 
             </select>
-            <button type="submit">Créer ma tâche</button> 
+            <button type="submit" class="btn-t3">Créer ma tâche</button> 
         </p>
     </form>
     <div>
     <h2>Ma liste de tâche à faire</h2>
-        <p>
-        {{ tableauTaches }}
-        </p>
+        <div class="lectureTaches">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="titreColonne">Temporalité</th>
+                        <th class="titreColonne">Nom de la tâche</th>
+                        <th class="titreColonne">Description</th>
+                        <th class="titreColonne">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in tabTaches" :key="item.id" :value= "item.value">
+                        <td class="colonne1">{{item.temporaliteChosit}}</td>
+                        <td class="colonne2">{{item.nom}}</td>
+                        <td class="colonne2">{{ item.description}}</td>
+                        <td class="colonne1"><button class="btn-t1">Editer</button><button class="btn-t2">Supprimer</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -115,5 +136,32 @@ export default {
 input, textarea, select, button {
     width : 90%;
     margin: 5px 10px;
+}
+.lectureTaches {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+.titreColonne {
+    font-size: bold;
+}
+.colonne1{
+    width: 10rem;
+}
+.colonne2 {
+    width: 50rem;
+}
+.btn-t1{
+    background-color: blue;
+    border-radius: 5px;
+}
+.btn-t2 {
+    background-color: red;
+    border-radius: 5px;
+}
+.btn-t3 {
+    background-color: green;
+    border-radius: 5px;
 }
 </style>
