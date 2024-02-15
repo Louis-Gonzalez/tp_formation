@@ -10,12 +10,13 @@ import products from "./data/productList.json"
 export default {
   name: 'App',
   components: {
+    // ici on va appeller tous les composants enfants de App.vue qui est le composant racine
     MainLayout,
     MainNav,
     ProductForm,
     ProductsTable
   },
-  data() {
+  data() { // la partie data ?????????? 
     return {
       userNavItemsArray : [
         {
@@ -64,18 +65,23 @@ export default {
       productToEdit: null
     }
   },
-  methods: {
+  methods: { 
+    // la première méthode est editProduct qui est une fonction qui à pour paramètre (product)
     editProduct(product) {
+    /* ici on regarde si l'objet product est différent de null, si il l'est alors on garde l'objet product
+    sinon on met les valeurs de l'obejt à éditer à null */
       this.productToEdit = product != null ? product : null
+    // ici on regarde si le mode edition est activté (true) ou pas 
       this.editMode = product != null ? true : false
     },
-    
     deleteProduct(product) {
-      /* Ici on va parcourir le tableau products et supprimer le produit transmis */
+      // Ici on va parcourir le tableau products et supprimer le produit transmis
       this.products = this.products.filter(el => el.id != product.id)
     },
     resetEditionMode() {
+      // ici on réinitise les valeurs de l'obejt product suivant à null
       this.productToEdit = null
+      // ici on réassigne le edit Mode à false pour le faire mettre à l'état normal de saisi
       this.editMode = false 
     }
   }
@@ -83,9 +89,15 @@ export default {
 </script>
 
 <template>
-  <!-- Monter les composants ici -->
-  <main-layout>
+  <main-layout><!-- Apparition du main-layout qui est la mise en forme du template html-->
     <template #header>
+    <!-- Dans le template, on voit un nouveau template avec #header
+    c'est un template qui sera chargé par le slot header que l'on retrouvera au fichier main-layout-->
+
+    <!-- Ici on voit un composant <main-nav/> qui contient 3 props: 
+    :navItems  qui appelle la fonction "navItemsArray, 
+    :userNavItems qui appelle la fonction userNaviItemsArray
+    :showUserNav qui est un boolen à (true)"-->
       <main-nav
         :navItems="navItemsArray"
         :userNavItems="userNavItemsArray"
@@ -94,12 +106,22 @@ export default {
     </template>
 
     <section class="d-flex wrap">
+    <!-- Ici est le composant <product-form/> avec un bouton updateProduct, on écoute le click via le @ 
+    et au click on appelle la fonction "updateProduct" dans ce composant, il y a 2 props: 
+    la première est editMode: qui appelle la fonction "editMode" 
+    et la deuxième productToEdit: qui appelle la fonction "productToEdit"-->
       <product-form
         @updateProduct="updateProduct"
         class="col-6"
         :editMode="editMode"
         :productToEdit="productToEdit"
       />
+    <!-- Ici est le composant <product-table/> avec 2 boutons, 
+    premier bouton @editProduct, on écoute le click via le @ et au click on appelle 
+    la fonction "editProduct" et le deuxième bouton est @deleteProduct et au click on appelle
+    la fonction "deleteProduct"
+    Et dans ce composant, il y a 1 props: 
+    :products qui appelle la fonction "products"-->
       <products-table
         class="col-6"
         :products="products"
@@ -107,7 +129,6 @@ export default {
         @deleteProduct="deleteProduct"
       />
     </section>
-  
   </main-layout>
 </template>
 
