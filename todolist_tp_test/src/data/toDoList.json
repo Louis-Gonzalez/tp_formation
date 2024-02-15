@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "titre": "bonne résolution 1",
+        "description": "arrêter de fumer",
+        "temporalite": "court_terme"
+    },
+    {
+        "id": 2,
+        "titre": "bonne résolution 2",
+        "description": "arrêter de boire l'alcool",
+        "temporalite": "moyen_terme"
+    },
+    {
+        "id": 3,
+        "titre": "bonne résolution 3",
+        "description": "arrêter de dire des betises",
+        "temporalite": "long_terme"
+    }
+]

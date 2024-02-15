@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "nom": "Stop la cigarette",
+        "description": "J'arrête de fumer. Je consulte pour me faire aider si j'ai besoin.",
+        "temporaiteChoisit": "court terme"
+    },
+    {
+        "id": 2,
+        "nom": "Stop l'alcool",
+        "description": "J'arrete de boire. JE consulte pour me faire aider si j'ai besoin",
+        "temporaliteChosit": "lmoyen terme"
+    },
+    {
+        "id": 3,
+        "nom": "Stop les bêtises",
+        "description": "J'arrête de dépenser tous mes sous n'importe comment.",
+        "temporaiteChoisit": "long terme"
+    }
+]
