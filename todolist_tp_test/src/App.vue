@@ -16,7 +16,7 @@ import FormToEditTache from './Form/FormToEditTache.vue';
       <MonTabTaches />
     </div>
     <div>
-      <!--<FormToEditTache />-->
+      <FormToEditTache />
     </div>
   </main>
 </template>

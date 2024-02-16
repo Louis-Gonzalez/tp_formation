@@ -41,3 +41,5 @@ npm run build
 ### Modification du base.css pour le fond blanc
 
 ### Création d'un formulaire d'édition de tache "FormToEditTache.vue" ``` je rencontre un problème sur edition ```
+
+### FIX du comportement du store "MyToDoList.js"
