@@ -1,0 +1,15 @@
+h1 {
+    color:red;
+    text-align: center;
+    font-weight: bold;
+}
+
+h3 {
+    color: blue;
+}
+.card {
+    margin: 1rem;
+}
+p{
+    text-align: justify;
+}

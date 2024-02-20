@@ -1,0 +1,47 @@
+.img {
+    width: 1750px;
+    height: auto;
+    text-align: center;
+}
+.carroussel {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin: 2rem;
+    
+}
+
+.carroussel img {
+    aspect-ratio: 5/2;
+}
+
+.avatar_scenario {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    border:black sold 1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem;
+}
+.img-combat{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    margin: 2rem;
+}
