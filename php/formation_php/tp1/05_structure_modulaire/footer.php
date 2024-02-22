@@ -1,5 +1,5 @@
 <footer class="bg-dark text-white text-center p-1">
-    <p>
+    <div class="p-footer">
         &copy; CCI BEAUJOLAIS DWWM
-    </p>
+    </div>
 </footer>

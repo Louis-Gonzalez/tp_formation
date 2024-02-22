@@ -1,7 +1,4 @@
-
 <?php
-    session_start();
-    //session_destroy();
     // on charge la config
     require "./config.php";
 

@@ -55,39 +55,39 @@ function extensionAutorise(){
 
 // permet de vérifer si le fichier existe on cherche avatar dans $FILES
 if (isset($_FILES['avatar'])){ 
-    // si l'un des champs est vide soit null alors j'écris une erreur dans le tableau d'erreur
-    // on verifie les valeurs champs
-    var_dump(($_POST['name']),($_POST['mail']),($_POST['pwd']),($_FILES['avatar']['name']));
+        // si l'un des champs est vide soit null alors j'écris une erreur dans le tableau d'erreur
+        // on verifie les valeurs champs
+        var_dump(($_POST['name']),($_POST['mail']),($_POST['pwd']),($_FILES['avatar']['name']));
 
-    $errors = []; // création d'un tableau vide d'erreur
+        $errors = []; // création d'un tableau vide d'erreur
 
-    if (empty($_POST['name']) || empty($_POST['mail']) || empty($_POST['pwd']) || empty($_FILES['avatar']['name']))
-        {
-            $errors[] = "Tous les champs sont obligatoires merci !";
+        if (empty($_POST['name']) || empty($_POST['mail']) || empty($_POST['pwd']) || empty($_FILES['avatar']['name']))
+            {
+                $errors[] = "Tous les champs sont obligatoires merci !";
+            }
+
+        $extension1 = getExtension(); // assigne extension1 à la valeur retourner de la fonction getExtension
+        var_dump("nom de extension", $extension1);
+        $extensionAccepte = extensionAutorise(); // assigne extensionAccepte à la valeur retourner de la fonction extensionAutorise
+
+        $newFile = "./uploads/".time().$extension1; // ici on écrit le chemin pour cibler le lieu du upload
+        var_dump($newFile);
+        var_dump($extensionAccepte);
+
+        if ($extensionAccepte == true){ // on vérifie l'extension fichier si elle est autorisée 
+            var_dump("hehehe");
+
+            if(empty($errors)){ // si le tableau d'eereur reste vide alors je fais l'upload
+                echo "<h2>fichier uploadé</h2>";
+                move_uploaded_file($_FILES['avatar']['tmp_name'],$newFile);
+            }
         }
-
-    $extension1 = getExtension(); // assigne extension1 à la valeur retourner de la fonction getExtension
-    var_dump("nom de extension", $extension1);
-    $extensionAccepte = extensionAutorise(); // assigne extensionAccepte à la valeur retourner de la fonction extensionAutorise
-
-    $newFile = "./uploads/".time().$extension1; // ici on écrit le chemin pour cibler le lieu du upload
-    var_dump($newFile);
-    var_dump($extensionAccepte);
-
-    if ($extensionAccepte == true){ // on vérifie l'extension fichier si elle est autorisée 
-        var_dump("hehehe");
-
-        if(empty($errors)){ // si le tableau d'eereur reste vide alors je fais l'upload
-            echo "<h2>fichier uploadé</h2>";
-            move_uploaded_file($_FILES['avatar']['tmp_name'],$newFile);
+        else 
+        { // double vérification via le tableau erreur
+            $errors[] = "ce type de fichier n'est pas accepté";
+            var_dump("toto", $errors);
+            echo $errors;
         }
-    }
-    else 
-    { // double vérification via le tableau erreur
-        $errors[] = "ce type de fichier n'est pas accepté";
-        var_dump("toto", $errors);
-        echo $errors;
-    }
 }
 echo "<pre>";
 var_dump($GLOBALS);

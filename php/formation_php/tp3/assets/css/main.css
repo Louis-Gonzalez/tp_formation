@@ -1,0 +1,29 @@
+h1 {
+    color:red;
+    text-align: center;
+    font-weight: bold;
+}
+
+h3 {
+    color: blue;
+}
+.card {
+    margin: 1rem;
+}
+p{
+    text-align: justify;
+}
+.p-footer{
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+textarea {
+    height: 13rem;
+}
+.titre-profil{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+

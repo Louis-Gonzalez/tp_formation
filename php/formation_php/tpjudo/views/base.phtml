@@ -28,11 +28,6 @@
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page === 'contact') echo  "active"; ?>" aria-current="page" href="?page=contact">Contact</a>
                             </li>
-                            <?php if(isset($_SESSION['user']['roles']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))):?>
-                                <li class="nav-item ">
-                                    <a class="nav-link <?php if($page === 'admin') echo  "active"; ?>" aria-current="page" href="?page=admin">Admin</a>
-                                </li>
-                            <?php endif; ?>
                         </ul>
                         <form class="d-flex" role="search">
                             <input name="page" value="search" type="hidden">
@@ -41,28 +36,12 @@
                         </form>
                     </div>
                 </div>
-                <div class="dropdown m-3">
-                    <li class="nav-item ">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Account
-                        </button>
-                        <ul class="dropdown-menu"> <!-- menu déroulant de connexion avec le choix s'inscrire, se loger, se deconnecter-->
-                            <?php if(!isset($_SESSION['user'])): ?>
-                                <li><a class="dropdown-item" href="?page=register">Sign up</a></li>
-                                <li><a class="dropdown-item" href="?page=login">Log in</a></li>
-                            <?php else: ?>
-                                <li><a class="dropdown-item" href="?page=logout">Log out</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                </div>
             </nav>
         </nav>
         </header>
         <!-- main -->
         <main class="container">
         <?php 
-        
             include "./views/template_".$page.".phtml"
         ?>
         </main>

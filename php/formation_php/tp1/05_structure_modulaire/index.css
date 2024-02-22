@@ -45,3 +45,6 @@ h5 {
     height: auto;
     margin: 2rem;
 }
+p{
+    text-align: justify;
+}
