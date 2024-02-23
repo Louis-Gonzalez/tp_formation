@@ -1,0 +1,40 @@
+<h1>Update un utilisateur</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Create_at</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php 
+    foreach($posts as $post) : ?>
+        <tr>
+            <td scope="row">
+                <?=$post['id']?>
+            </td>
+            <td>
+                <img src="<?=$post['image']?>" atl="<?=$post['title']?>" width="100px">
+            </td>
+            <td>
+                <?=$post['title']?>
+            </td>
+            <td>
+                <?=$post['description']?><!-- <?=substr($post['description'],0,100)?> -->
+            </td>
+            <td>
+                <?=$post['create_at']?>
+            </td>
+            <td>
+                <button class="btn btn-danger m-2">Delete</button>
+                <button class="btn btn-primary m-2">Update</button>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

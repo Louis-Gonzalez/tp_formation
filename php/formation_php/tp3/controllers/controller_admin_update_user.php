@@ -5,8 +5,6 @@ if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_S
     header("Location: ?page=home");
     exit;
 }
-
-
 // vérifer si l'utilisateur à le droit admin
 
 
