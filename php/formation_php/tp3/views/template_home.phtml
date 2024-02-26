@@ -1,4 +1,12 @@
 <h1><?= CONFIG_SITE_TITLE ?></h1> <!-- http://localhost/formation_php/tp3/?page=home -->
+
+<p>
+    Welcome Dear <strong><?= $_SESSION['user']['firstname'] ?> <?= $_SESSION['user']['lastname'] ?></strong>
+</p>
+<!-- <pre>
+    <?php var_dump($_SESSION); ?>
+</pre> -->
+
 <!-- carroussel dynamique -->
 <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-indicators">

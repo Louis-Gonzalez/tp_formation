@@ -7,7 +7,7 @@ $db = connectDB();
 $posts = [];
 
 if ($db){
-    $sql = $db->query("SELECT * FROM post ORDER BY id");  // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
+    $sql = $db->query("SELECT post.*, contact.firstname, contact.lastname FROM post, contact WHERE post.user_id=contact.user_id order by create_at desc");  // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
     $sql->execute(); // exécute la requete
     //echo "<pre>"; // permet de préformater le rendu visuel
     $posts = ($sql->fetchAll(PDO::FETCH_ASSOC)); // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete 

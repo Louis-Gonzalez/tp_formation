@@ -20,7 +20,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
     // on se connecte à la bdd et on verifie si l'email existe dans la bdd et on le récupère
     $db = connectDB();
-    $query = $db->prepare("SELECT * FROM user WHERE email=:email LIMIT 1" ); // requete sql
+    $query = $db->prepare("SELECT user.*, contact.firstname ,contact.lastname FROM user, contact WHERE email=:email AND user.id = contact.user_id  LIMIT 1" ); // requete sql
     $query ->bindParam(':email',$email); // sert à protéger les injections sql "bindParam"
     $query ->execute(); // on exécute de la requête
     $user = $query ->fetch(PDO::FETCH_ASSOC); // retourne tout les éléments lié à l'email dans la table "user" 

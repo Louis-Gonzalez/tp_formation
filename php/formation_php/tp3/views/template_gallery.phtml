@@ -17,9 +17,13 @@
         <div class="card" style="width: 18rem;">
             <img src="<?= $article['image'] ?>" class="card-img-top" alt="image.$key">
             <div class="card-body">
-            <h5 class="card-title"><?= $article['title'] ?></h5>
-            <p class="card-text"><?= $article['description'] ?></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title"><?= $article['title'] ?></h5>
+                <p class="card-text"><?= $article['description'] ?></p>
+                <a href="?page=details_card&id=<?= $article['id']?>" class="btn btn-primary">Read more</a>
+                <p class="mt-4">
+                    <!-- insertion du nom de l'auteur du post ici -->
+                    Autor: <strong><?= $article['firstname'] ?> <?= $article['lastname'] ?></strong>
+                </p>
             </div>
         </div>
     <?php endforeach; ?>

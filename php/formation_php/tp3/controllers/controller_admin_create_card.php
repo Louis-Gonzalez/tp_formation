@@ -18,13 +18,14 @@ if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['image
     $image = htmlentities(strip_tags($_POST['image']));
 
     // on ajoute la card à la bdd
-    $sql = $db->prepare("INSERT INTO post (title, description, image) VALUES
-    (:title, :description, :image)");
+    // on a jouté le user_id pour qu'il soit pris en compte par la bdd
+    $sql = $db->prepare("INSERT INTO post (user_id, title, description, image) VALUES 
+    (:user_id, :title, :description, :image)");
     // on lie les paramètres
     $sql->bindParam(':title', $title);
     $sql->bindParam(':description', $description);
     $sql->bindParam(':image', $image);
-
+    $sql->bindParam(':user_id', $_SESSION['user']['id']); // ajout de l'id de l'utilisateur qui a ajoutée la card
     // on exécute la requête
     $sql->execute();
 
