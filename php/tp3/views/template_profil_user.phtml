@@ -1,0 +1,64 @@
+<h1>Profil</h1> <!-- http://localhost/formation_php/tp3/?page=contact -->
+
+<div class="titre-profil">
+    <div>
+        <img src="./assets/uploads/avatars/<?php echo $profil['avatar']?>" alt="avatar defaut"/>
+    </div>
+    <div>
+        <p>Your profil in <span style ="font-weight: bold"><?= CONFIG_SITE_TITLE ?></span></p>
+    </div>
+</div>
+
+<form class="row g-3" action="?page=register" method="POST" enctype="multipart/form-data"> <!-- action renvoie vers la page ciblé  et method= post ne renvoie pas les infos du formulaire dans url  "enctype="multipart/form-data" est obligatoire quand on envoie des inputs de type FILES  pour pouvoir uploader les fichiers-->
+    <div class=" col-md-6 ">
+        <p>
+            Lastname : <?= $profil['lastname'] ?>
+        </p>
+        
+    </div>
+    <div class="col-md-6">
+        <p>
+            Firstname : <?= $profil['firstname'] ?>
+        </p>
+        
+    </div>
+    <div class="col-md-6">
+        <p>
+            Address 1 : <?= $profil['address1'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Address2 :<?= $profil['address2'] ?>
+        </p>
+    </div>
+    <div class="col-md-2">
+        <p>
+            Zip :<?= $profil['zip'] ?>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p>
+            City :<?= $profil['city'] ?>
+        </p>
+    </div>
+    <div class="col-md-3">
+        <p>
+            State :<?= $profil['state'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Email :<?= $profil['email'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Roles :<?= $profil['roles'] ?>
+        </p>
+    </div>
+    <div class="col-12 mb-4 text-center">
+        <a type="button" class="btn btn-warning" href="?page=admin_tab_user">Exit profil</a>
+    </div>
+    
+</form>

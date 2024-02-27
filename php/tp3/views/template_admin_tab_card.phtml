@@ -1,0 +1,61 @@
+<h1>Update / Create Card </h1>
+
+
+
+<form class="d-flex" role="search" >
+    <div class="add-post">
+        <a class="btn btn-success" href="?page=admin_create_card">Add Card</a>
+    </div>
+    <input name="page" value="admin_tab_card" type="hidden"> <!-- pour chercher dans la passe ciblé dans value-->
+    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Create_at</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php 
+    foreach($posts as $post) : ?>
+        <tr>
+            <td scope="row">
+                <?=$post['id']?>
+            </td>
+            <td>
+                <a href="?page=details_card&id=<?=$post['id']?>"><img class="thumbnail" src="<?=$post['image']?>" atl="<?=$post['title']?>"></a>
+            </td>
+            <td>
+                <?=$post['title']?>
+            </td>
+            <td>
+                <?=$post['description']?><!-- <?=substr($post['description'],0,100)?> possibilité d'afficher les 100 premiers caractères--> 
+            </td>
+            <td>
+                <?=$post['create_at']?>
+            </td>
+            <td>
+                <a class="btn btn-danger m-2" href="javascript:deleteCard(<?=$post['id']?>)">Delete</a> <!--on crée le lien vers l'action delete en lien avec l'id-->
+                <a class="btn btn-primary m-2" href="?page=admin_update_card&id=<?=$post['id']?>">Update</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script>
+    function deleteCard(id){ // on crée une fonction suppression avec l'id et une fenetre de contrôle
+        // on affiche une fenetre de contrôle
+        const question = window.confirm("Are you sure you want to delete this card" + id +"?");
+        // fait l'action de supprimer 
+        if (question === true){
+            window.location.href = "?page=admin_delete_card&id="+id;
+        }
+    }
+</script>

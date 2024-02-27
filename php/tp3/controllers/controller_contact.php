@@ -43,37 +43,37 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
     if (empty($errors)){ // si le tableau d'erreurs restent vide alors on peut créer l'user
         
-            //echo "On peut ajouetr un utilisateur";
-            // insertion dans la table user l'email et password 
-            $sql = $db->prepare("INSERT INTO user (email, password) VALUES  
-            (:email, :password)");
-            // on lie les paramètres
-            $sql->bindParam(':email', $email); 
-            $sql->bindParam(':password', $password);
-            // on exécute la requête
-            $sql->execute();
+        //echo "On peut ajouetr un utilisateur";
+        // insertion dans la table user l'email et password 
+        $sql = $db->prepare("INSERT INTO user (email, password) VALUES  
+        (:email, :password)");
+        // on lie les paramètres
+        $sql->bindParam(':email', $email); 
+        $sql->bindParam(':password', $password);
+        // on exécute la requête
+        $sql->execute();
 
-            $user_id = $db->lastInsertId(); // on retourne le dernier "id" de l'utilisateur qui a été inseré dans la table user
-            // echo $user_id; // on affiche l'id de l'utilisateur qui a été inseré dans la table user
+        $user_id = $db->lastInsertId(); // on retourne le dernier "id" de l'utilisateur qui a été inseré dans la table user
+        // echo $user_id; // on affiche l'id de l'utilisateur qui a été inseré dans la table user
 
-            $sql = $db->prepare("INSERT INTO contact (firstname, lastname, address1, address2, zip, city, state, user_id, message) VALUES
-            (:firstname, :lastname, :adress1, :adress2, :zip, :city, :state, :user_id, :message)");
-            // on lie les paramètres
-            $sql->bindParam(':firstname', $firstname);
-            $sql->bindParam(':lastname', $lastname);
-            $sql->bindParam(':adress1', $address1);
-            $sql->bindParam(':adress2', $address2);
-            $sql->bindParam(':zip', $zip);
-            $sql->bindParam(':city', $city);
-            $sql->bindParam(':state', $state);
-            $sql->bindParam(':user_id', $user_id);
-            $sql->bindParam(':message', $message);
-            // on exécute la requête
-            $sql->execute();
+        $sql = $db->prepare("INSERT INTO contact (firstname, lastname, address1, address2, zip, city, state, user_id, message) VALUES
+        (:firstname, :lastname, :adress1, :adress2, :zip, :city, :state, :user_id, :message)");
+        // on lie les paramètres
+        $sql->bindParam(':firstname', $firstname);
+        $sql->bindParam(':lastname', $lastname);
+        $sql->bindParam(':adress1', $address1);
+        $sql->bindParam(':adress2', $address2);
+        $sql->bindParam(':zip', $zip);
+        $sql->bindParam(':city', $city);
+        $sql->bindParam(':state', $state);
+        $sql->bindParam(':user_id', $user_id);
+        $sql->bindParam(':message', $message);
+        // on exécute la requête
+        $sql->execute();
 
-            // si on arrive ici, c'est tout bon
-            $isfinish = true;    // on affiche le message de confirmation de l'insertion dans la bdd
-        }
+        // si on arrive ici, c'est tout bon
+        $isfinish = true;    // on affiche le message de confirmation de l'insertion dans la bdd
+    }
 }
 //echo "<pre>"; 
 // var_dump($_POST);
@@ -81,8 +81,8 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 // on charge la vue
 
 $state = [ // déclaration du tableau du menu déroulant
-        "Auvergne-Rhône-Alpes",
-        "Bourgogne-Franche-Comté",
+        "Auvergne-Rhone-Alpes",
+        "Bourgogne-Franche-Comte",
         "Bretagne",
         "Centre-Val de Loire",
         "Corse",
@@ -93,12 +93,12 @@ $state = [ // déclaration du tableau du menu déroulant
         "Nouvelle-Aquitaine",
         "Occitanie",
         "Pays de la Loire",
-        "Provence Alpes Côte d’Azur",
+        "Provence Alpes Cote d Azur",
         "Guadeloupe",
         "Guyane",
         "Martinique",
         "Mayotte",
-        "Réunion"
+        "Reunion"
 ];
 
 include "./views/base.phtml";

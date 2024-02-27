@@ -1,0 +1,45 @@
+<h1>Login</h1> <!-- http://localhost/formation_php/tp3/?page=contact -->
+
+<section>
+    <p>
+        Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. 
+        Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. 
+        Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. 
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. 
+        Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, 
+        augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna. 
+    </p>
+
+    <?php if (isset($errors) && !empty($errors)): // si l'erreur existe et que le tableau d'erreurs n'est pas vide // on affiche les erreurs
+            foreach ($errors as $error): ?>   
+    <div class="alert alert-danger" role="alert">
+        <?php echo $error; ?> 
+    </div>
+
+    <?php endforeach;?> <!-- on ferme la boucle foreach -->
+    <?php endif;?>
+
+    <?php if (!isset ($_SESSION['user'])): ?>
+
+    <form method="POST" action="?page=login"> <!-- action renvoie vers la page ciblée "login"  et method= post ne renvoie pas les infos du formulaire dans url -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rember_me" name="rember_me">
+            <label class="form-check-label" for="rember_me">Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3" >Sign in</button>
+    </form>
+    <?php else: ?>
+        <div class="alert alert-success" role="alert">
+            <p class="text-center">Vous êtes mainteant connecté avec <?php $_SESSION['user']['email']?> et bonne visite. </p>
+        </div>
+    <?php endif; ?>
+</section>

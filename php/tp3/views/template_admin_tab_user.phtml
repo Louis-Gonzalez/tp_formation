@@ -1,0 +1,56 @@
+<h1>Create, Update and Delete  a user</h1>
+
+<div class="add-post">
+    <a class="btn btn-success" href="?page=admin_create_user">Add User</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Avatar</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Register_at</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php 
+    foreach($posts as $post) : ?>
+        <tr>
+            <td scope="row">
+                <?=$post['id']?>
+            </td>
+            <td>
+                <?=$post['email']?>
+            </td>
+            <td>
+                <img src="./assets/uploads/avatars/<?=$post['avatar']?>" alt="" width="50px">
+            </td>
+            <td>
+                <?=$post['roles']?>
+            </td>
+            <td>
+                <?=$post['register_at']?>
+            </td>
+            <td>
+                <a class="btn btn-danger m-2" href="javascript:deleteUser(<?=$post['id']?>)">Delete</a>
+                <a class="btn btn-primary m-2" href="?page=admin_update_user&id=<?=$post['id']?>">Update</a>
+                <a class="btn btn-warning m-2" href="?page=profil_user&id=<?=$post['id']?>">Show profil</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<script>
+    function deleteUser(id){ // on crée une fonction suppression avec l'id et une fenetre de contrôle
+        // on affiche une fenetre de contrôle
+        const question = window.confirm("Are you sure you want to delete this user" + id +"?");
+        // fait l'action de supprimer 
+        if (question === true){
+            window.location.href = "?page=admin_delete_user&id="+ id;
+        }
+    }
+</script>

@@ -1,4 +1,14 @@
 <h1><?= CONFIG_SITE_TITLE ?></h1> <!-- http://localhost/formation_php/tp3/?page=home -->
+
+<?php if(isset($_SESSION['user']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))): ?>
+    <p>
+        Welcome Dear <strong><?= $_SESSION['user']['firstname'] ?> <?= $_SESSION['user']['lastname'] ?></strong> <!-- affichage conditionnel d'être au moins au role de membre -->
+    </p>
+<?php endif; ?>
+<!-- <pre>
+    <?php var_dump($_SESSION); ?>
+</pre> -->
+
 <!-- carroussel dynamique -->
 <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-indicators">
