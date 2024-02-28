@@ -1,7 +1,8 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))){
+if(!isRole("ROLE_ADMIN"))
+{
     header("Location: ?page=home");
     exit;
 }
@@ -10,22 +11,23 @@ if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_S
 $db = connectDB();
 $posts = [];
 
-// on récupère les posts
-if ($db){
-    $sql = $db->query("SELECT * FROM user ORDER BY id DESC");  // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
-    $sql->execute(); // exécute la requete
-    //echo "<pre>"; // permet de préformater le rendu visuel
+// bare de recherche
+$keywords = "";
+if(isset($_GET["keywords"])){
+    $keywords = $_GET["keywords"];
+}
 
-    $posts = ($sql->fetchAll(PDO::FETCH_ASSOC)); // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete 
+// on récupère les users
+if ($db){
+    // requete sql pour recupérer les data de la table user
+    $sql = $db->query("SELECT * FROM user WHERE email LIKE '%".$keywords."%' ORDER BY id DESC");
+    // exécute la requete
+    $sql->execute();
+    // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete
+    $posts = ($sql->fetchAll(PDO::FETCH_ASSOC));  
     //var_dump($posts);
 }
-// echo "<pre>"; 
-// var_dump($posts);
-// echo "</pre>";
-// si oui alors afficher la page admin
 
-
-// si non rediriger vers la page d'accueil
 // on charge la vue
 include "./views/base.phtml";
 ?>

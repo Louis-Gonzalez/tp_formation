@@ -57,8 +57,13 @@
             Roles :<?= $profil['roles'] ?>
         </p>
     </div>
-    <div class="col-12 mb-4 text-center">
-        <a type="button" class="btn btn-warning" href="?page=admin_tab_user">Exit profil</a>
-    </div>
-    
+    <?php if(isset($_SESSION['user']['roles']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))):?>
+        <div class="col-12 mb-4 text-center">
+            <a type="button" class="btn btn-warning" href="?page=admin_tab_user">Exit</a>
+        </div>
+    <?php else : ?> 
+            <div class="col-12 mb-4 text-center">
+                <a type="button" class="btn btn-warning" href="?page=gallery">Exit</a>
+            </div>
+    <?php endif; ?>
 </form>

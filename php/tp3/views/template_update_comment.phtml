@@ -1,0 +1,13 @@
+<h1>Update Comment</h1>
+
+<div class="mt-3">
+    <form action="?page=update_comment&id=<?= $post_id?>&comment_id=<?= $comment['id']?>" method="POST">
+        <div class="col-md-6">
+            <label for="comment" class="form-label m-2">Comment*</label>
+            <textarea type="text" class="form-control" id="comment" name="description" placeholder="Add a comment" required><?= $comment['description'] ?></textarea>
+        </div>
+        <div class="col-12 m-4 ">
+            <input type="submit" class="btn btn-success" value="Add Comment !">
+        </div>
+    </form>
+</div>

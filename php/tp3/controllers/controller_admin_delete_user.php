@@ -1,7 +1,8 @@
 <?php 
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))){
+if(!isRole("ROLE_ADMIN"))
+{
     header("Location: ?page=home");
     exit;
 }
@@ -15,7 +16,8 @@ $posts = [];
 
 // on récupère les posts
 if ($db){
-    $sql = $db->query("DELETE FROM contact WHERE user_id = $post_id"); // requete sql pour effacer la data de la table contact qui est enfant de la table user
+    $sql = $db->query("DELETE FROM contact WHERE user_id = $post_id");
+    $sql = $db->query("DELETE FROM comment WHERE user_id = $post_id"); // requete sql pour effacer la data de la table contact qui est enfant de la table user
     $sql = $db->query("DELETE FROM user WHERE id = $post_id");  // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
     $sql->execute(); // exécute la requete
     //echo "<pre>"; // permet de préformater le rendu visuel

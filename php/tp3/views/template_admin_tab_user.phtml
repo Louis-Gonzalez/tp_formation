@@ -1,8 +1,14 @@
 <h1>Create, Update and Delete  a user</h1>
 
-<div class="add-post">
-    <a class="btn btn-success" href="?page=admin_create_user">Add User</a>
-</div>
+
+<form class="d-flex" role="search" >
+    <div class="add-post">
+        <a class="btn btn-success" href="?page=admin_create_user">Add User</a>
+    </div>
+    <input name="page" value="admin_tab_user" type="hidden"> <!-- pour chercher dans la passe ciblé dans value-->
+    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
 <table class="table">
     <thead>
