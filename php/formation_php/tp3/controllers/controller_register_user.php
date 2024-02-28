@@ -1,26 +1,17 @@
 <?php
-// on vérifie le rôle 
-if(!isRole("ROLE_ADMIN"))
-{
-    header("Location: ?page=home");
-    exit;
-}
 
 // on appelle la bdd
 $db = connectDB();
 $posts = [];
 $isfinish = false;
 
-// création de la fonction pour récuper l'extension et la mettre dans le fichier upload
+// création de la fonction pour récuper l'extension et la remettre dans le fichier upload
 function getExtension(){
-    // on cible le fichier.extensionfichier
-    $temp = $_FILES['avatar']['name']; 
-    // je le découpe par le séparateur point,
-    $tabExtension = explode(".", $temp);    
+    $temp = $_FILES['avatar']['name']; // on cible le fichier.extensionfichier
+    $tabExtension = explode(".", $temp); // je le découpe par le séparateur point,
     // le deuxième paramètre est le fichier à découper
-    return ".".$tabExtension[1]; 
-    /* retourne le résultat pour l'utiliser dans $newfile
-    on porrait ecrire = end($tabExtension) pour récuper le dernier index du tableau 
+    return ".".$tabExtension[1]; // retourne le résultat pour l'utiliser dans $newfile
+    /* on porrait ecrire = end($tabExtension) pour récuper le dernier index du tableau 
     au cas il y aurait plusieurs extension 
     j'ajoute manuellement le point et je concatene avec le .avant $tabExtension*/
 };
@@ -47,51 +38,48 @@ function extensionAutorise(){
 // permet de vérifer si le fichier existe on cherche avatar dans $FILES
 if (isset($_FILES['avatar'])){ 
     // si l'un des champs est vide soit null alors j'écris une erreur dans le tableau d'erreur
-    // on verifie les valeurs champs //var_dump(($_FILES['avatar']['name']));
+    // on verifie les valeurs champs
+    //var_dump(($_FILES['avatar']['name']));
+
     // if (empty($_FILES['avatar']['name']));
     //     {
     //        $avatar = // on lui affete l'avatar par defaut
     //     }
+
     //var_dump($_FILES['avatar']);
 
-    // assigne extension1 à la valeur retourner de la fonction getExtension
-    $extension1 = getExtension();   
+    $extension1 = getExtension(); // assigne extension1 à la valeur retourner de la fonction getExtension
     //var_dump("nom de extension", $extension1);
-    // assigne extensionAccepte à la valeur retourner de la fonction extensionAutorise
-    $extensionAccepte = extensionAutorise(); 
+    $extensionAccepte = extensionAutorise(); // assigne extensionAccepte à la valeur retourner de la fonction extensionAutorise
     $time = time();
-    // ici on écrit le chemin pour cibler le lieu du upload
-    $newFile = "./assets/uploads/avatars/".$time.$extension1; 
+    $newFile = "./assets/uploads/avatars/".$time.$extension1; // ici on écrit le chemin pour cibler le lieu du upload
     //var_dump($newFile);
     //var_dump($extensionAccepte);
 
-    // on vérifie l'extension fichier si elle est autorisée 
-    if ($extensionAccepte == true){ 
+    if ($extensionAccepte == true){ // on vérifie l'extension fichier si elle est autorisée 
         //var_dump("hehehe");
-        // si le tableau d'erreur reste vide alors je fais l'upload
-        if(empty($errors)){     
-            //echo "<h2>fichier uploadé</h2>";
+
+        if(empty($errors)){ // si le tableau d'eereur reste vide alors je fais l'upload
+            echo "<h2>fichier uploadé</h2>";
             move_uploaded_file($_FILES['avatar']['tmp_name'],$newFile);
         }
     }
-    else {   
-        // vérification via le tableau erreur
+    else 
+    { // double vérification via le tableau erreur
         $errors[] = "ce type de fichier n'est pas accepté";
         //var_dump("toto", $errors);
         //echo $errors;
     }
 }
 
-// Vérification conditionnelle des champs inputs du formulaires "admin_create_user.phtml"
 if(
     isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['address1']) && isset($_POST['address2']) && isset($_POST['zip']) && isset($_POST['city']) && isset($_POST['state']) && isset($_POST['email']) && isset($_POST['password'])
 
     && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['address1']) && !empty($_POST['address2']) && !empty($_POST['zip']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['email']) && !empty($_POST['password']))
+{
+    var_dump("entrée dans la condition");
 
-{   //var_dump("entrée dans la condition");
-    
-    // ceci va nettoyer le code de tout les symboles pour garder que les alphanumériques
-    $email = htmlentities(strip_tags($_POST['email'])); 
+    $email = htmlentities(strip_tags($_POST['email'])); // ceci va nettoyer le code de tout les symboles pour garder que les alphanumériques
     $avatar = $time.$extension1;
     $password = htmlentities(strip_tags($_POST['password']));
     $firstname = htmlentities(strip_tags($_POST['firstname']));
@@ -102,24 +90,20 @@ if(
     $city = htmlentities(strip_tags($_POST['city']));
     $state = htmlentities(strip_tags($_POST['state']));
 
-    // password_hash fonction native de php qui prend en argument $password qui sera à traité et le deuxième argument est la méthode de hachage par defaut qui est évolutive
-    $password = password_hash($password, PASSWORD_DEFAULT); 
+    $password = password_hash($password, PASSWORD_DEFAULT); // password_hash fonction native de php qui prend en argument $password qui sera à traité et le deuxième argument est la méthode de hachage par defaut qui est évolutive
 
-    // création d'un tableau de réception d'erreurs
-    $errors = []; 
+    $errors = []; // création d'un tableau de réception d'erreurs
     $exist = false;
 
-    // ici on utlise la fonctionne filter_var pour la vérification de l'émail
-    if ((!filter_var($email, FILTER_VALIDATE_EMAIL))){ 
-        // message de débug si l'email n'est pas valide
-        $errors[] = "Veuillez rensigner une adresse email valide svp"; 
+    if ((!filter_var($email, FILTER_VALIDATE_EMAIL))){ // ici on utlise la fonctionne filter_var pour la vérification de l'émail
+        $errors[] = "Veuillez rensigner une adresse email valide svp"; // message de débug si l'email n'est pas valide
     }
-    // ON AFFECTE LE ROLE MEMBER PAR DEFAUT AU USER
-    $roles = '["ROLE_MEMBER"]'; 
 
-    // si le tableau d'erreurs restent vide alors on peut créer l'user
-    if (empty($errors)){    
-        // on vérifie si l'user peut-être ajouter
+    $roles = '["ROLE_MEMBER"]'; // ON AFFECTE LE ROLE MEMBER PAR DEFAUT AU USER
+    //$avatar = './asstes/uplaods/avatars/avatrdefault.png';
+
+    if (empty($errors)){ // si le tableau d'erreurs restent vide alors on peut créer l'user
+        
         echo "On peut ajouetr un utilisateur";
         // on ajoute la card à la bdd
         // on a jouté le user_id pour qu'il soit pris en compte par la bdd
@@ -129,15 +113,13 @@ if(
         $sql->bindParam(':email', $email);
         $sql->bindParam(':avatar', $avatar);
         $sql->bindParam(':password', $password);
-        $sql->bindParam(':roles', $roles);
+        $sql->bindParam(':roles', $roles); // ajout de l'id de l'utilisateur qui a ajoutée la card
         // on exécute la requête
         $sql->execute();
 
-        // on retourne le dernier "id" de l'utilisateur qui a été inseré dans la table user
+        $user_id = $db->lastInsertId(); // on retourne le dernier "id" de l'utilisateur qui a été inseré dans la table user
         // echo $user_id; // on affiche l'id de l'utilisateur qui a été inseré dans la table user
-        $user_id = $db->lastInsertId(); 
 
-        // on ajoute les infos contact à la bdd
         $sql = $db->prepare("INSERT INTO contact (user_id, firstname, lastname, address1, address2, zip, city, state) VALUES
         (:user_id, :firstname, :lastname, :adress1, :adress2, :zip, :city, :state)");
         // on lie les paramètres
@@ -153,16 +135,14 @@ if(
         $sql->execute();
 
         // si on arrive ici, c'est tout bon
-        // on affiche le message de confirmation de l'insertion dans la bdd
-        $isfinish = true;    
+        $isfinish = true;    // on affiche le message de confirmation de l'insertion dans la bdd
     }
     // redirection après ajout de la card
-    header("Location: ?page=admin_tab_user");
+    header("Location: ?page=home");
     exit;
 }
 
-// déclaration du tableau du menu déroulant Attention, le menu déroulant ne peut rendre de value avec des accents
-$state = [ 
+$state = [ // déclaration du tableau du menu déroulant
     "Auvergne-Rhone-Alpes",
     "Bourgogne-Franche-Comte",
     "Bretagne",
@@ -183,6 +163,7 @@ $state = [
     "Reunion"
 ];
 
+// si non rediriger vers la page d'accueil
 // on charge la vue
 include "./views/base.phtml";
 ?>

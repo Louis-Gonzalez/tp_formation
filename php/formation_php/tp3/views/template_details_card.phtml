@@ -49,14 +49,26 @@
                         <div class="tab-pane fade" id="specs" role="tabpanel" aria-labelledby="specs-tab">
                             <table class="table mt-3">
                                 <tr>
+                                    <th>Avatar</th>
                                     <th>Autor</th>
                                     <th>Commentaire</th>
+                                    <!-- ajouter les conditions pour éditer / supprimer-->
+                                    <?php if(isset($_SESSION['user']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))): ?>
+                                    <th>Actions</th>
+                                    <?php endif; ?>
                                 </tr>
                                     <!-- boucle du tableau des commentaires -->
                                     <?php foreach($comments as $comment) : ?>
                                     <tr>
-                                        <td><?= $comment['firstname'] ?> <?= $comment['lastname'] ?></td>
+                                        <td><img src="./assets/uploads/avatars/<?= $comment['avatar'] ?>" class="img-fluid" style="height: 30px"></td>
+                                        <td><a href="?page=profil_user&id=<?= $comment['author']?>"><?= $comment['firstname'] ?> <?= $comment['lastname'] ?></a></td>
                                         <td><?= $comment['description']?></td>
+                                            <?php if(isset($_SESSION['user']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))): ?>
+                                            <td>
+                                                <a href=""><img src="./assets/image/pen.png" alt="trash-been" style="height: 50px"></a>
+                                                <a href=""><img src="./assets/image/trash-been.png" alt="trash-been" style="height: 30px"></a>
+                                            </td>
+                                            <?php endif; ?>
                                     </tr>
                                     <?php endforeach; ?>
                             </table>

@@ -1,9 +1,15 @@
 <h1>Update / Create Card </h1>
 
 
-<div class="add-post">
-    <a class="btn btn-success" href="?page=admin_create_card">Add Card</a>
-</div>
+
+<form class="d-flex" role="search" >
+    <div class="add-post">
+        <a class="btn btn-success" href="?page=admin_create_card">Add Card</a>
+    </div>
+    <input name="page" value="admin_tab_card" type="hidden"> <!-- pour chercher dans la passe ciblé dans value-->
+    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
 <table class="table table-striped">
     <thead>
@@ -24,7 +30,7 @@
                 <?=$post['id']?>
             </td>
             <td>
-                <img class="thumbnail" src="<?=$post['image']?>" atl="<?=$post['title']?>">
+                <a href="?page=details_card&id=<?=$post['id']?>"><img class="thumbnail" src="<?=$post['image']?>" atl="<?=$post['title']?>"></a>
             </td>
             <td>
                 <?=$post['title']?>

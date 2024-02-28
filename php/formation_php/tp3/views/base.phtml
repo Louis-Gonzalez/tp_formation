@@ -28,6 +28,11 @@
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page === 'contact') echo  "active"; ?>" aria-current="page" href="?page=contact">Contact</a>
                             </li>
+                            <?php if(isset($_SESSION['user']['roles']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))):?>
+                                <li class="nav-item ">
+                                    <a class="nav-link <?php if($page === 'profil') echo  "active"; ?>" aria-current="page" href="?page=profil_user&id=<?= $_SESSION['user']['id'] ?>">Profil</a>
+                                </li>
+                            <?php endif; ?>
                             <?php if(isset($_SESSION['user']['roles']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))):?>
                                 <li class="nav-item ">
                                     <a class="nav-link <?php if($page === 'admin') echo  "active"; ?>" aria-current="page" href="?page=admin">Admin</a>
@@ -48,7 +53,7 @@
                         </button>
                         <ul class="dropdown-menu"> <!-- menu déroulant de connexion avec le choix s'inscrire, se loger, se deconnecter-->
                             <?php if(!isset($_SESSION['user'])): ?>
-                                <li><a class="dropdown-item" href="?page=register">Sign up</a></li>
+                                <li><a class="dropdown-item" href="?page=register_user">Sign up</a></li>
                                 <li><a class="dropdown-item" href="?page=login">Log in</a></li>
                             <?php else: ?>
                                 <li><a class="dropdown-item" href="?page=logout">Log out</a></li>

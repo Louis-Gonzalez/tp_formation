@@ -20,7 +20,7 @@
 <?php endforeach;?> <!-- on ferme la boucle foreach -->
 <?php endif;?>
 
-<form class="row g-3" action="?page=admin_create_user" method="POST" enctype="multipart/form-data"> <!-- action renvoie vers la page ciblé  et method= post ne renvoie pas les infos du formulaire dans url  "enctype="multipart/form-data" est obligatoire quand on envoie des inputs de type FILES  pour pouvoir uploader les fichiers-->
+<form class="row g-3" action="?page=register_user" method="POST" enctype="multipart/form-data"> <!-- action renvoie vers la page ciblé  et method= post ne renvoie pas les infos du formulaire dans url  "enctype="multipart/form-data" est obligatoire quand on envoie des inputs de type FILES  pour pouvoir uploader les fichiers-->
     <div class="col-md-6">
         <label for="firstname" class="form-label">Firstname *</label>
         <input type="text" class="form-control" id="firstname" name="firstname" required>

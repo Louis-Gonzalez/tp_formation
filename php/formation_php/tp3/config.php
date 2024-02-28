@@ -1,4 +1,5 @@
 <?php
+//////////////////////////////////////////////// config.php ////////////////////////////////////////////////////////////////////
 // fonction de connexion à la base donnés
 function connectDB(){
     $db = false;
@@ -18,9 +19,30 @@ const DB_USER = "root";
 const DB_PASS = "";
 
 // Nouvelle méthode pour déclarer les constantes
-const CONFIG_SITE_TITLE = "Mon superbe MVC";
+const CONFIG_SITE_TITLE = "My wonderfull MVC";
 
 // Ancienne méthode pour déclarer les constantes
 define("CONFIG_SITE_SLOGAN", "Cette magnifique structure permet de séparer les responsabilités afin de mieux maintenir notre code");
+
+
+//////////////////////////////////////////////// factorisation /////////////////////////////////////////////////////////////////////
+// factorisation de la fonction qui test le rôle
+function isRole($role){
+    $is_role = isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']));
+    return $is_role;
+}
+
+// factorisation de la fonction debuf var_dump
+function dump($var){
+    echo "<pre>";
+    var_dump($var);
+    echo "</pre>";
+}
+
+// factorisation de la fonction de nettoyage des champs inputs des formulaires
+function cleaner($input){
+    $stringclean = htmlentities(strip_tags($input));
+    return $stringclean;
+}
 
 ?>

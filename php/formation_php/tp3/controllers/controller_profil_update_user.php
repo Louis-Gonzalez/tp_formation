@@ -1,8 +1,7 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isRole("ROLE_ADMIN"))
-{
+if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))){
     header("Location: ?page=home");
     exit;
 }
@@ -86,19 +85,17 @@ $id_to_update = (int)$_GET['id']; // on va récupérer l'id du user
 
 // on récupère les users
 if ($db){
-    //$sql = $db->query("SELECT * FROM user ,contact WHERE user.id = $id_to_update and contact.user_id = $id_to_update"); 
-    $sql = $db->query("SELECT * FROM user INNER JOIN contact on user.id = contact.user_id WHERE user.id = $id_to_update");
-    // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
+    $sql = $db->query("SELECT * FROM user,contact WHERE user.id = $id_to_update and contact.user_id = $id_to_update");  // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
     $sql->execute(); // exécute la requete
     //echo "<pre>"; // permet de préformater le rendu visuel
     $post = ($sql->fetch(PDO::FETCH_ASSOC)); // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete 
 
 
-    // var_dump($post);
+    var_dump($post);
 
-    echo "<pre>";
-    var_dump($post) ;
-    echo "</pre>";
+    // echo "<pre>";
+    // var_dump($post) ;
+    // echo "</pre>";
 
     if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['address1']) && isset($_POST['address2'])  && isset($_POST['zip']) && isset($_POST['city']) && isset($_POST['state']) && isset($_POST['roles']) && isset($_POST['email']) && isset($_FILES['avatar'])
     

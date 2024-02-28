@@ -1,7 +1,8 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))){
+if(!isRole("ROLE_ADMIN"))
+{
     header("Location: ?page=home");
     exit;
 }

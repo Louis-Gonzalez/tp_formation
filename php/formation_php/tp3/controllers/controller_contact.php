@@ -81,8 +81,8 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 // on charge la vue
 
 $state = [ // déclaration du tableau du menu déroulant
-        "Auvergne-Rhône-Alpes",
-        "Bourgogne-Franche-Comté",
+        "Auvergne-Rhone-Alpes",
+        "Bourgogne-Franche-Comte",
         "Bretagne",
         "Centre-Val de Loire",
         "Corse",
@@ -93,12 +93,12 @@ $state = [ // déclaration du tableau du menu déroulant
         "Nouvelle-Aquitaine",
         "Occitanie",
         "Pays de la Loire",
-        "Provence Alpes Côte d’Azur",
+        "Provence Alpes Cote d Azur",
         "Guadeloupe",
         "Guyane",
         "Martinique",
         "Mayotte",
-        "Réunion"
+        "Reunion"
 ];
 
 include "./views/base.phtml";
