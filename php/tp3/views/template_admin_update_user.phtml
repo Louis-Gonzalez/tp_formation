@@ -47,7 +47,7 @@
     </div>
     <div class="col-md-3">
         <label for="state" class="form-label">Old State *</label>
-        <?php var_dump($post['state']) ?>
+        <?php var_Utils::dump($post['state']) ?>
         <select id="state" class="form-select" name="state" required> <!-- création du menu deroulant--> 
             <option> Choose.... *</option> 
             <?php foreach($state as $value):?> <!-- choix de l'option via une boucle forech qui parcours le tableau --> 
@@ -65,7 +65,7 @@
     </div>
         <div class="col-md-6">
         <label for="roles" class="form-label">Old Roles *</label>
-        <?php var_dump($post['roles']) ?>
+        <?php var_Utils::dump($post['roles']) ?>
             <select id="roles" class="form-select" name="roles" required> <!-- création du menu deroulant--> 
                 <option <?php if (empty($post['roles'])) echo 'selected'?>> Choose.... *</option> 
                 <?php foreach($roles as $value):?> <!-- choix de l'option via une boucle forech qui parcours le tableau --> 

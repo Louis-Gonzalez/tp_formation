@@ -1,14 +1,14 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle 
-if(!isRole("ROLE_ADMIN"))
+if(!Utils::isRole("ROLE_ADMIN"))
 {
     header("Location: ?page=home");
     exit;
 }
 
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $posts = [];
 
 // bare de recherche  

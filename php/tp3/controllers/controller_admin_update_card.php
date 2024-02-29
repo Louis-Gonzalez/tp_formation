@@ -1,14 +1,14 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isRole("ROLE_ADMIN"))
+if(!Utils::isRole("ROLE_ADMIN"))
 {
     header("Location: ?page=home");
     exit;
 }
 
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $post = [];
 $id_to_update = (int)$_GET['id']; // on va récupérer l'id du post
 
@@ -18,7 +18,7 @@ if ($db){
     $sql->execute(); // exécute la requete
     //echo "<pre>"; // permet de préformater le rendu visuel
     $post = ($sql->fetch(PDO::FETCH_ASSOC)); // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete 
-    //var_dump($posts);
+    //var_Utils::dump($posts);
 
     // echo "<pre>";
     // var_dump($GLOBALS) ;

@@ -1,14 +1,14 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isRole("ROLE_ADMIN"))
+if(!Utils::isRole("ROLE_ADMIN"))
 {
     header("Location: ?page=home");
     exit;
 }
 // vérifer si l'utilisateur à le droit admin
 // ma logique de controller
-$db = connectDB();
+$db = Utils::connectDB();
 $posts = [];
 
 // bare de recherche
@@ -25,7 +25,7 @@ if ($db){
     $sql->execute();
     // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete
     $posts = ($sql->fetchAll(PDO::FETCH_ASSOC));  
-    //var_dump($posts);
+    //var_Utils::dump($posts);
 }
 
 // on charge la vue

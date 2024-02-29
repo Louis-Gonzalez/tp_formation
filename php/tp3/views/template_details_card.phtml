@@ -67,7 +67,7 @@
                                             <?php if ((isset($_SESSION['user']['roles'])) && (in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles'])) || $comment['author'] == $_SESSION['user']['id'])): ?>
                                             <td>
                                                 <a href="?page=update_comment&id=<?= $post_id?>&comment_id=<?= $comment['comment_id']?>"><img src="./assets/image/pen.png" alt="pen" style="height: 50px"></a>
-                                                <a href=""><img src="./assets/image/trash-been.png" alt="trash-been" style="height: 30px"></a>
+                                                <a href="?page=delete_comment&id=<?= $post_id?>&comment_id=<?= $comment['comment_id']?>"><img src="./assets/image/trash-been.png" alt="trash-been" style="height: 30px"></a>
                                             </td>
                                             <?php endif; ?>
                                     </tr>

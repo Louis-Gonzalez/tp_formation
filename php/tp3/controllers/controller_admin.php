@@ -1,7 +1,7 @@
 <?php
 // aller chercher le role de l'user dans la base de donnée
 // on vérifie le rôle n'existe pas  ou si l'utilisateur n'a pas le droit d'admin
-if(!isRole("ROLE_ADMIN"))
+if(!Utils::isRole("ROLE_ADMIN"))
 {
     header("Location: ?page=home");
     exit;

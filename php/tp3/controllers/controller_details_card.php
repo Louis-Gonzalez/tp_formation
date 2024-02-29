@@ -1,14 +1,16 @@
 <?php
 
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $post = [];
 
 // on va récupérer l'id du post 
 $post_id = (int)$_GET['id'];  
 
-// on crée des variables 
-$user_id = $_SESSION['user']['id'];
+// on va chercher l'id de l'user
+if (isset($_SESSION['user']['id'])){
+    $user_id = $_SESSION['user']['id'];
+}
 
 // on ajoute le commentaire
 if(isset($_POST['comment']) && !empty($_POST['comment'])){

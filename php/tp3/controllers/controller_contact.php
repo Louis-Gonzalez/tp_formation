@@ -29,8 +29,10 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
         $errors[] = "Veuillez rensigner une adresse email valide svp"; // message de débug si l'email n'est pas valide
     }
+
+    
     // on verifie si l'email existe dejà dans la base de donnée
-    $db = connectDB(); // on se connecte à la bdd
+    $db = Utils::connectDB(); // on se connecte à la bdd
     $query = $db->prepare("SELECT email FROM user WHERE email=:email"); // requete sql
     $query ->bindParam(':email',$email); // sert à protéger les injections sql "bindParam"
     $query ->execute(); // on exécute de la requête
@@ -39,7 +41,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     if ($exist){
             $errors[] = "Cet utilisateur existe déjà dans la base donnée.";
         }
-        //var_dump($errors); // on affiche le tableau d'erreurs
+        //var_Utils::dump($errors); // on affiche le tableau d'erreurs
 
     if (empty($errors)){ // si le tableau d'erreurs restent vide alors on peut créer l'user
         
@@ -76,7 +78,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     }
 }
 //echo "<pre>"; 
-// var_dump($_POST);
+// var_Utils::dump($_POST);
 // bla bla bla
 // on charge la vue
 

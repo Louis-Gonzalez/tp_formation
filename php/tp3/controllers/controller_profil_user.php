@@ -2,7 +2,7 @@
 // si oui alors afficher la page admin
 // s'il y a le role_admin alors je fais le traitement
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $posts = [];
 
 $id_to_show = (int)$_GET['id']; // on va récupérer l'id du user

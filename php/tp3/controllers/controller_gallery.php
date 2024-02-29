@@ -1,20 +1,11 @@
 <?php
+// on appelle le models class Post qui est le module 
+require_once('./models/Post.php');
 
-// le role des controller sont là pour gérer la logique, gérer les autorisations, faire afficher les parties en fonctions de rôles une fois loger
+$post = new Post();
+// $posts recupère tous les $post avec la requête sql getAll, le 1er paramèttre nul pour la limite, et le 2eme paramètre est la rêquete sql
+$posts = $post->getAll(null,"SELECT post.*, contact.firstname, contact.lastname FROM post, contact WHERE post.user_id=contact.user_id order by create_at desc");
 
-// ma logique de controller
-$db = connectDB();
-$posts = [];
-
-if ($db){
-    $sql = $db->query("SELECT post.*, contact.firstname, contact.lastname FROM post, contact WHERE post.user_id=contact.user_id order by create_at desc");  // requete sql pour recupérer les data de la table post // query peut être remplacer par prepare
-    $sql->execute(); // exécute la requete
-    //echo "<pre>"; // permet de préformater le rendu visuel
-    $posts = ($sql->fetchAll(PDO::FETCH_ASSOC)); // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete 
-    //var_dump($posts);
-}
-
-// bla bla bla
 // on charge la vue
 include "./views/base.phtml";
 

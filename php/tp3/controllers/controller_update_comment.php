@@ -1,19 +1,19 @@
 <?php
 
 // on vérifie le rôle 
-if(!isRole("ROLE_ADMIN") && $_GET['comment_id'] != $_SESSION['user']['id'])
+if(!Utils::isRole("ROLE_ADMIN") && $_GET['comment_id'] != $_SESSION['user']['id'])
 {
     header("Location: ?page=home");
     exit;
 }
 
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $comments = [];
 $post_id = (int)$_GET['id'];
 
 // on va récupérer l'id commentaire
-$comment_id_to_update = (int)$_GET['comment_id'];  // ???????????????????
+$comment_id_to_update = (int)$_GET['comment_id']; 
 
 if ($db){
     // requete sql pour recupérer les data de la table comment
@@ -22,10 +22,10 @@ if ($db){
     $sql->execute(); 
     // on va chercher les datas de la requete // PDO::FETCH_ASSOC renvoie le tableau de requete 
     $comment = ($sql->fetch(PDO::FETCH_ASSOC)); 
-    var_dump($comment);
+    Utils::dump($comment);
 
     // echo "<pre>";
-    // var_dump($GLOBALS) ;
+    // var_Utils::dump($GLOBALS) ;
     // echo "</pre>";
 
     // il faut qu'il soit set et non vide

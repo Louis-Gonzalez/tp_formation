@@ -1,4 +1,4 @@
-h1 {
+h1{
     color:red;
     text-align: center;
     font-weight: bold;
@@ -63,4 +63,12 @@ img.thumbnail{
 }
 .add-post{
     margin-right: 0.5rem;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
 }

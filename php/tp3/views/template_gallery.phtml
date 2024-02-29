@@ -19,11 +19,15 @@
             <div class="card-body">
                 <h5 class="card-title"><?= $article['title'] ?></h5>
                 <p class="card-text"><?= $article['description'] ?></p>
-                <a href="?page=details_card&id=<?= $article['id']?>" class="btn btn-primary">Read more</a>
                 <p class="mt-4">
                     <!-- insertion du nom de l'auteur du post ici -->
                     Autor: <strong><?= $article['firstname'] ?> <?= $article['lastname'] ?></strong>
                 </p>
+                <a href="?page=details_card&id=<?= $article['id']?>" class="btn btn-primary">Read more</a>
+                <div class="mt-2">
+                    <button class="btn btn-info" type="button" onclick="addWishList(<?= $article['id'] ?>)">Add WishList</button>
+                    <label class="form-check-label" for="rember_me"></label>
+                </div>
             </div>
         </div>
     <?php endforeach; ?>

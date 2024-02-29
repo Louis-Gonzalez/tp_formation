@@ -1,13 +1,13 @@
 <?php
 // on vérifie le rôle 
-if(!isRole("ROLE_ADMIN"))
+if(!Utils::isRole("ROLE_ADMIN"))
 {
     header("Location: ?page=home");
     exit;
 }
 
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $posts = [];
 $isfinish = false;
 
@@ -34,7 +34,7 @@ function extensionAutorise(){
     {
         //echo "extensionValide", "ok";
         $extensionOk = true;
-        //var_dump($extensionOk);
+        //var_Utils::dump($extensionOk);
     }
     else
     {
@@ -47,27 +47,27 @@ function extensionAutorise(){
 // permet de vérifer si le fichier existe on cherche avatar dans $FILES
 if (isset($_FILES['avatar'])){ 
     // si l'un des champs est vide soit null alors j'écris une erreur dans le tableau d'erreur
-    // on verifie les valeurs champs //var_dump(($_FILES['avatar']['name']));
+    // on verifie les valeurs champs //var_Utils::dump(($_FILES['avatar']['name']));
     // if (empty($_FILES['avatar']['name']));
     //     {
     //        $avatar = // on lui affete l'avatar par defaut
     //     }
-    //var_dump($_FILES['avatar']);
+    //var_Utils::dump($_FILES['avatar']);
 
     // assigne extension1 à la valeur retourner de la fonction getExtension
     $extension1 = getExtension();   
-    //var_dump("nom de extension", $extension1);
+    //var_Utils::dump("nom de extension", $extension1);
     // assigne extensionAccepte à la valeur retourner de la fonction extensionAutorise
     $extensionAccepte = extensionAutorise(); 
     $time = time();
     // ici on écrit le chemin pour cibler le lieu du upload
     $newFile = "./assets/uploads/avatars/".$time.$extension1; 
-    //var_dump($newFile);
-    //var_dump($extensionAccepte);
+    //var_Utils::dump($newFile);
+    //var_Utils::dump($extensionAccepte);
 
     // on vérifie l'extension fichier si elle est autorisée 
     if ($extensionAccepte == true){ 
-        //var_dump("hehehe");
+        //var_Utils::dump("hehehe");
         // si le tableau d'erreur reste vide alors je fais l'upload
         if(empty($errors)){     
             //echo "<h2>fichier uploadé</h2>";
@@ -77,7 +77,7 @@ if (isset($_FILES['avatar'])){
     else {   
         // vérification via le tableau erreur
         $errors[] = "ce type de fichier n'est pas accepté";
-        //var_dump("toto", $errors);
+        //var_Utils::dump("toto", $errors);
         //echo $errors;
     }
 }
@@ -88,7 +88,7 @@ if(
 
     && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['address1']) && !empty($_POST['address2']) && !empty($_POST['zip']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['email']) && !empty($_POST['password']))
 
-{   //var_dump("entrée dans la condition");
+{   //var_Utils::dump("entrée dans la condition");
     
     // ceci va nettoyer le code de tout les symboles pour garder que les alphanumériques
     $email = htmlentities(strip_tags($_POST['email'])); 

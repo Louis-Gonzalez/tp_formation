@@ -1,7 +1,7 @@
 <?php
 
 // on appelle la bdd
-$db = connectDB();
+$db = Utils::connectDB();
 $posts = [];
 $isfinish = false;
 
@@ -25,7 +25,7 @@ function extensionAutorise(){
     {
         //echo "extensionValide", "ok";
         $extensionOk = true;
-        //var_dump($extensionOk);
+        //var_Utils::dump($extensionOk);
     }
     else
     {
@@ -39,25 +39,25 @@ function extensionAutorise(){
 if (isset($_FILES['avatar'])){ 
     // si l'un des champs est vide soit null alors j'écris une erreur dans le tableau d'erreur
     // on verifie les valeurs champs
-    //var_dump(($_FILES['avatar']['name']));
+    //var_Utils::dump(($_FILES['avatar']['name']));
 
     // if (empty($_FILES['avatar']['name']));
     //     {
     //        $avatar = // on lui affete l'avatar par defaut
     //     }
 
-    //var_dump($_FILES['avatar']);
+    //var_Utils::dump($_FILES['avatar']);
 
     $extension1 = getExtension(); // assigne extension1 à la valeur retourner de la fonction getExtension
-    //var_dump("nom de extension", $extension1);
+    //var_Utils::dump("nom de extension", $extension1);
     $extensionAccepte = extensionAutorise(); // assigne extensionAccepte à la valeur retourner de la fonction extensionAutorise
     $time = time();
     $newFile = "./assets/uploads/avatars/".$time.$extension1; // ici on écrit le chemin pour cibler le lieu du upload
-    //var_dump($newFile);
-    //var_dump($extensionAccepte);
+    //var_Utils::dump($newFile);
+    //var_Utils::dump($extensionAccepte);
 
     if ($extensionAccepte == true){ // on vérifie l'extension fichier si elle est autorisée 
-        //var_dump("hehehe");
+        //var_Utils::dump("hehehe");
 
         if(empty($errors)){ // si le tableau d'eereur reste vide alors je fais l'upload
             echo "<h2>fichier uploadé</h2>";
@@ -67,7 +67,7 @@ if (isset($_FILES['avatar'])){
     else 
     { // double vérification via le tableau erreur
         $errors[] = "ce type de fichier n'est pas accepté";
-        //var_dump("toto", $errors);
+        //var_Utils::dump("toto", $errors);
         //echo $errors;
     }
 }
@@ -77,7 +77,7 @@ if(
 
     && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['address1']) && !empty($_POST['address2']) && !empty($_POST['zip']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['email']) && !empty($_POST['password']))
 {
-    var_dump("entrée dans la condition");
+    var_Utils::dump("entrée dans la condition");
 
     $email = htmlentities(strip_tags($_POST['email'])); // ceci va nettoyer le code de tout les symboles pour garder que les alphanumériques
     $avatar = $time.$extension1;

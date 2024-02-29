@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 28 fév. 2024 à 17:16
+-- Généré le : jeu. 29 fév. 2024 à 17:02
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -104,7 +104,10 @@ INSERT INTO `post` (`id`, `user_id`, `title`, `description`, `image`, `create_at
 (34, 13, 'new post avec compte test', 'test description compte test', 'https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-26 10:16:35'),
 (41, 13, 'add test user', 'add description ', 'https://images.pexels.com/photos/358904/pexels-photo-358904.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-26 11:59:16'),
 (42, 13, 'ciel étoilé', 'obscurs, consectetur, extrait d\'un passage du Lorem Ipsum, et en étudiant tous les usages de ce mot dans la littérature classique, découvrit la source incontestable du Lorem Ipsum. Il provient en fait des sections 1.10.32 et 1.10', 'https://images.pexels.com/photos/355465/pexels-photo-355465.jpeg?auto=compress&cs=tinysrgb&w=600', '2024-02-26 12:19:41'),
-(43, 14, 'Magnifique Baie', 'Magnifique panorama de la baie d&#039;une plage de la Californie.', 'https://images.pexels.com/photos/462162/pexels-photo-462162.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-27 16:32:38');
+(43, 14, 'Magnifique Baie', 'Magnifique panorama de la baie d&#039;une plage de la Californie.', 'https://images.pexels.com/photos/462162/pexels-photo-462162.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-27 16:32:38'),
+(44, 14, 'Add new pos t', 'Add new post apr&egrave;s modification des class', 'https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-29 14:56:16'),
+(45, 14, 'La rivière tranquille', 'C\'est une rivière très reposante pour une cure de tranquilité.\r\n\r\nUt sit amet magna. Cras a ligula eu urna dignissim viverra. Nullam tempor leo porta ipsum. Praesent purus. Nullam consequat. Mauris dictum sagittis dui. Vestibulum sollicitudin consectetuer', 'https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=600', '2024-02-29 14:57:16'),
+(46, 14, 'dedede', 'dedede', 'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-29 17:00:16');
 
 -- --------------------------------------------------------
 
@@ -184,7 +187,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT pour la table `user`

@@ -2,7 +2,7 @@
 
 // le role des controller sont là pour gérer la logique, gérer les autorisations, faire afficher les parties en fonctions de rôles une fois loger
 // echo "<pre>"; 
-// var_dump($_POST);
+// var_Utils::dump($_POST);
 // echo "</pre>";
 
 // ma logique de controller
@@ -19,14 +19,14 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     $email = htmlentities(strip_tags($_POST['email'])); // on sécurise le champs
 
     // on se connecte à la bdd et on verifie si l'email existe dans la bdd et on le récupère
-    $db = connectDB();
+    $db = Utils::connectDB();
     $query = $db->prepare("SELECT user.*, contact.firstname ,contact.lastname FROM user, contact WHERE email=:email AND user.id = contact.user_id  LIMIT 1" ); // requete sql
     $query ->bindParam(':email',$email); // sert à protéger les injections sql "bindParam"
     $query ->execute(); // on exécute de la requête
     $user = $query ->fetch(PDO::FETCH_ASSOC); // retourne tout les éléments lié à l'email dans la table "user" 
     
     $db_hash = $user['password']; // on récupère le mot de passe dans la bdd
-    //var_dump($user['password']);
+    //var_Utils::dump($user['password']);
 
     $errors = []; // création d'un tableau de réception d'erreurs
 
@@ -38,7 +38,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
         // on vérifie si $user est un tableau et que le mot de passe correspond
         if (is_array($user)){
-            //var_dump($user);
+            //var_Utils::dump($user);
             $db_hash = $user['password'];
             if (password_verify($password, $db_hash)){
                 //echo "good password";
@@ -53,8 +53,8 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         }
         $isfinish = true;
     }
-    // var_dump($errors);
-    // var_dump($isfinish);
+    // var_Utils::dump($errors);
+    // var_Utils::dump($isfinish);
 }
 // bla bla bla
 
