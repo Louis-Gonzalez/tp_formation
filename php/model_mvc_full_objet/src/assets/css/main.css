@@ -1,0 +1,75 @@
+
+h1{
+    color:red;
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+h3 {
+    color: blue;
+}
+.card {
+    margin: 1rem;
+}
+p{
+    text-align: justify;
+}
+.p-footer{
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+textarea {
+    height: 13rem;
+}
+.titre-profil{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.admin-home{
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem;
+    padding: 1rem;
+}
+.create-user,
+.update-user,
+.create-card{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: solid 1px black;
+    background-color: cadetblue;
+    padding: 1rem;
+    margin: 1rem;
+    width: 25rem;
+    height: auto; 
+}
+.p-create-user,
+.p-update-user,
+.p-create-card{
+    color : black;
+    margin: 1rem;
+    padding: 1rem;
+
+}
+img.thumbnail{
+    width: 100px;
+}
+.img-admin-update-card{
+    width: 100px;
+    text-align: center;
+}
+.add-post{
+    margin-right: 0.5rem;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}

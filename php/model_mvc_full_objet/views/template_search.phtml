@@ -1,0 +1,25 @@
+<?php 
+
+    $posts = $data['posts'];
+    $keywords = $data['keywords'];
+?>
+
+<h1> Search Resultat(s)  "<?= $keywords ?>"</h1>
+
+<p>
+    Le(s) résultat(s) :
+</p>
+
+<section class="row">
+    <?php 
+    foreach($posts as $key => $search) : ?>
+        <div class="card" style="width: 18rem;">
+            <img src="<?= $search['image'] ?>" class="card-img-top" alt="image.$key">
+            <div class="card-body">
+            <h5 class="card-title"><?= $search['title'] ?></h5>
+            <p class="card-text"><?= $search['description'] ?></p>
+            <a href="?page=details_card&id=<?= $search['id'] ?>" class="btn btn-primary">Read more</a>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</section>
