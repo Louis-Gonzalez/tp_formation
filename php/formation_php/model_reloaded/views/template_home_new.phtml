@@ -1,0 +1,65 @@
+<h1><?= CONFIG_SITE_TITLE ?></h1> <!-- http://localhost/formation_php/tp3/?page=home -->
+
+<h2><?= $title ?></h2>
+
+<?php if(isset($_SESSION['user']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))): ?>
+    <p>
+        Welcome Dear <strong><?= $_SESSION['user']['firstname'] ?> <?= $_SESSION['user']['lastname'] ?></strong> <!-- affichage conditionnel d'être au moins au role de membre -->
+    </p>
+<?php endif; ?>
+
+
+<!-- carroussel dynamique -->
+<div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <?php foreach($data['posts'] as $key => $article): ?> <!--ajouter des keys -->
+        <div class="carousel-item <?php if($key === array_key_first($data['posts'])) echo "active" ?>"> <!--verification que le premier du tableau soit la key active ce qui évite la superposition des images actives dans le carroussel -->
+            <img src="<?= $article['image'] ?>" class="d-block w-100" alt="<?= $article['title'] ?>" style="max-height:1000px">
+            <div class="carousel-caption d-none d-md-block">
+                <h5><?= $article['title'] ?></h5>
+                <p><?= $article['description'] ?></p>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<h2>Home</h2>
+
+<p>
+<!-- <?= CONFIG_SITE_SLOGAN ?> -->
+</p>
+<p>
+    « Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, 
+    dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, 
+    varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, 
+    non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, 
+    pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. 
+    Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. 
+    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. 
+    Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit. 
+</p>
+<!-- <h3>Mes articles de blogs</h3> -->
+<!-- $article peut être n'importe quel nom -->
+<!--<?php
+foreach($posts as $article): ?>  
+    <article>
+        <h4><?= $article['title'] ?></h4>
+        <img src="<?= $article['image']?>" width="150">
+        <p><?= $article['description'] ?></p>
+        <small><?= $article['create_at'] ?></small>
+    </article>
+<?php endforeach; ?> -->
