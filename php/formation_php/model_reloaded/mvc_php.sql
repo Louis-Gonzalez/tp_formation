@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 04 mars 2024 à 17:01
+-- Généré le : lun. 04 mars 2024 à 21:05
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -31,25 +31,27 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT 1,
   `post_id` int(11) NOT NULL DEFAULT 1,
-  `description` varchar(255) NOT NULL
+  `description` varchar(255) NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
-INSERT INTO `comment` (`id`, `user_id`, `post_id`, `description`) VALUES
-(1, 18, 1, 'Post de Julien, c\'est cool la vie en rose . '),
-(2, 14, 1, 'Post de Louis, la méditation : c\'est génial ! '),
-(10, 14, 42, 'test transmission data à la base'),
-(11, 14, 41, 'Oh, les beaux coquillages : '),
-(12, 17, 42, 'ajout d\'un post avec un role membre '),
-(13, 14, 43, 'L\'eau est trop belle ! Petite merveille du monde. Fait-elle partie des 7 merveilles du mondes ? '),
-(14, 14, 43, 'Commentaire à effacer pour le test delete post'),
-(20, 14, 41, 'J\'essaie les redirections !'),
-(22, 38, 41, '6846'),
-(23, 38, 41, '6846'),
-(24, 14, 45, 'test add comment ');
+INSERT INTO `comment` (`id`, `user_id`, `post_id`, `description`, `create_at`, `update_at`) VALUES
+(1, 18, 1, 'Post de Julien, c\'est cool la vie en rose . ', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(2, 14, 1, 'Post de Louis, la méditation : c\'est génial ! ', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(10, 14, 42, 'test transmission data à la base', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(11, 14, 41, 'Oh, les beaux coquillages : ', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(12, 17, 42, 'ajout d\'un post avec un role membre ', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(13, 14, 43, 'L\'eau est trop belle ! Petite merveille du monde. Fait-elle partie des 7 merveilles du mondes ? ', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(14, 14, 43, 'Commentaire à effacer pour le test delete post', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(20, 14, 41, 'J\'essaie les redirections !', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(22, 38, 41, '6846', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(23, 38, 41, '6846', '2024-03-04 20:33:03', '2024-03-04 20:33:03'),
+(24, 14, 45, 'test add comment ', '2024-03-04 20:33:03', '2024-03-04 20:33:03');
 
 -- --------------------------------------------------------
 
@@ -68,33 +70,34 @@ CREATE TABLE `contact` (
   `city` varchar(30) NOT NULL,
   `state` varchar(30) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `create_at` datetime NOT NULL DEFAULT current_timestamp()
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `contact`
 --
 
-INSERT INTO `contact` (`id`, `user_id`, `lastname`, `firstname`, `address1`, `address2`, `zip`, `city`, `state`, `message`, `create_at`) VALUES
-(1, 13, 'test', 'test', 'test', 'test', '123213', 'test', 'Bourgogne-Franche-Comte', 'message de test', '2024-02-21 15:33:46'),
-(2, 14, 'gonzalez', 'louis', 'lot 10 accacias', 'amareins', '01090', 'francheleins', 'Auvergne-Rhône-Alpes', 'Message pour Louis ', '2024-02-21 16:27:21'),
-(3, 15, 'pipoune', 'pipoune', 'rue de la gaité', 'appartement de la joie', '01090', 'grancheleins', 'Bourgogne-Franche-Comte', 'Message pour pipoune', '2024-02-21 16:36:01'),
-(4, 16, 'sabine', 'sabine', 'bon pour boire du champagne', 'rodderor', '01090', 'frkkr', 'Bretagne', 'message pour sabine', '2024-02-21 16:38:48'),
-(5, 17, 'thomas', 'thomas', 'lot du syrul', 'alderon', '02300', 'gtgtlkgtl', 'Centre-Val de Loire', 'message de Thomas', '2024-02-21 16:41:23'),
-(6, 18, 'julien', 'julien', 'saint julien', 'bibolo', '7878546', 'st julio bibo', 'Bourgogne-Franche-Comte', 'message pour julien chaud&#039;des cheveux &amp; il aime le chocolat. ', '2024-02-21 16:48:38'),
-(7, 19, 'gonzalez', 'edouard', 'fdklfjdlkj', 'ljfkjfkl', '1234', 'lkfjdlkfjm', 'Bourgogne-Franche-Comte', 'Message pour edouard', '2024-02-22 09:19:55'),
-(8, 20, 'fuji', 'fuji', 'route de montagne bleu', 'chalet 14', '06789', 'montmagique', 'Auvergne-Rhone-Alpes', 'Message de fuji', '2024-02-22 09:42:30'),
-(13, 25, 'reg', 'regis', 'aeaze', 'ezezae', '5465465', 'ojopfejzp', 'Bretagne', 'message du register', '2024-02-22 11:34:24'),
-(14, 26, 'testregister', 'testregister', 'ldkljdelkjdlmk', 'jerjpoeriazoriop', '5456866', 'kopjfoikehzfoi', 'Bretagne', '', '2024-02-22 13:54:10'),
-(15, 27, 'testtest', 'testtest', 'dede', 'dede', '12132', 'kjfkdl', 'Bourgogne-Franche-Comte', '', '2024-02-23 09:13:19'),
-(16, 28, 'ded', 'de', 'de', 'de', '223', 'kjelm', 'Bourgogne-Franche-Comté', '', '2024-02-23 09:18:08'),
-(17, 29, 'parent', 'andre', '8963 rue de Staingrad', 'appartement 14b', '54000', 'Nancy', 'Grand Est', '', '2024-02-27 10:40:41'),
-(19, 31, 'tsetse', 'mouche', 'ruoute de l&#039;insecticide', 'baygon', '45621', 'test', 'Occitanie', '', '2024-02-27 13:57:07'),
-(20, 32, 'test12', 'test12', 'test12', 'test12', '135455', 'test12', 'Ile-de-France', '', '2024-02-27 14:01:42'),
-(23, 35, 'hihoied', 'diehio', 'ihdeiohde', 'oiihdeoihdeoi', '54', '654', 'Provence Alpes Cote d Azur', '', '2024-02-27 14:16:43'),
-(24, 36, 'leboss', 'adam', 'rue du pro', 'appratement 15', '54589', 'kdjekojdoe', 'Auvergne-Rhone-Alpes', '', '2024-02-28 08:51:37'),
-(25, 37, 'kroco', 'marco', 'rue de la rivi&egrave;re', 'Maison crocodile', '78963', 'aligator', 'Centre-Val de Loire', '', '2024-02-28 08:53:37'),
-(26, 38, 'dadou', 'dadou', '8963 rue de Staingrad', 'de^ldpe', '12345', 'mksljzpm', 'Bretagne', '', '2024-02-28 09:09:28');
+INSERT INTO `contact` (`id`, `user_id`, `lastname`, `firstname`, `address1`, `address2`, `zip`, `city`, `state`, `message`, `create_at`, `update_at`) VALUES
+(1, 13, 'test', 'test', 'test', 'test', '123213', 'test', 'Bourgogne-Franche-Comte', 'message de test', '2024-02-21 15:33:46', '2024-03-04 20:15:08'),
+(2, 14, 'gonzalez', 'louis', 'lot 10 accacias', 'amareins', '01090', 'francheleins', 'Auvergne-Rhône-Alpes', 'Message pour Louis ', '2024-02-21 16:27:21', '2024-03-04 20:15:08'),
+(3, 15, 'pipoune', 'pipoune', 'rue de la gaité', 'appartement de la joie', '01090', 'grancheleins', 'Bourgogne-Franche-Comte', 'Message pour pipoune', '2024-02-21 16:36:01', '2024-03-04 20:15:08'),
+(4, 16, 'sabine', 'sabine', 'bon pour boire du champagne', 'rodderor', '01090', 'frkkr', 'Bretagne', 'message pour sabine', '2024-02-21 16:38:48', '2024-03-04 20:15:08'),
+(5, 17, 'thomas', 'thomas', 'lot du syrul', 'alderon', '02300', 'gtgtlkgtl', 'Centre-Val de Loire', 'message de Thomas', '2024-02-21 16:41:23', '2024-03-04 20:15:08'),
+(6, 18, 'julien', 'julien', 'saint julien', 'bibolo', '7878546', 'st julio bibo', 'Bourgogne-Franche-Comte', 'message pour julien chaud&#039;des cheveux &amp; il aime le chocolat. ', '2024-02-21 16:48:38', '2024-03-04 20:15:08'),
+(7, 19, 'gonzalez', 'edouard', 'fdklfjdlkj', 'ljfkjfkl', '1234', 'lkfjdlkfjm', 'Bourgogne-Franche-Comte', 'Message pour edouard', '2024-02-22 09:19:55', '2024-03-04 20:15:08'),
+(8, 20, 'fuji', 'fuji', 'route de montagne bleu', 'chalet 14', '06789', 'montmagique', 'Auvergne-Rhone-Alpes', 'Message de fuji', '2024-02-22 09:42:30', '2024-03-04 20:15:08'),
+(13, 25, 'reg', 'regis', 'aeaze', 'ezezae', '5465465', 'ojopfejzp', 'Bretagne', 'message du register', '2024-02-22 11:34:24', '2024-03-04 20:15:08'),
+(14, 26, 'testregister', 'testregister', 'ldkljdelkjdlmk', 'jerjpoeriazoriop', '5456866', 'kopjfoikehzfoi', 'Bretagne', '', '2024-02-22 13:54:10', '2024-03-04 20:15:08'),
+(15, 27, 'testtest', 'testtest', 'dede', 'dede', '12132', 'kjfkdl', 'Bourgogne-Franche-Comte', '', '2024-02-23 09:13:19', '2024-03-04 20:15:08'),
+(16, 28, 'ded', 'de', 'de', 'de', '223', 'kjelm', 'Bourgogne-Franche-Comté', '', '2024-02-23 09:18:08', '2024-03-04 20:15:08'),
+(17, 29, 'parent', 'andre', '8963 rue de Staingrad', 'appartement 14b', '54000', 'Nancy', 'Grand Est', '', '2024-02-27 10:40:41', '2024-03-04 20:15:08'),
+(19, 31, 'tsetse', 'mouche', 'ruoute de l&#039;insecticide', 'baygon', '45621', 'test', 'Occitanie', '', '2024-02-27 13:57:07', '2024-03-04 20:15:08'),
+(20, 32, 'test12', 'test12', 'test12', 'test12', '135455', 'test12', 'Ile-de-France', '', '2024-02-27 14:01:42', '2024-03-04 20:15:08'),
+(23, 35, 'hihoied', 'diehio', 'ihdeiohde', 'oiihdeoihdeoi', '54', '654', 'Provence Alpes Cote d Azur', '', '2024-02-27 14:16:43', '2024-03-04 20:15:08'),
+(24, 36, 'leboss', 'adam', 'rue du pro', 'appratement 15', '54589', 'kdjekojdoe', 'Auvergne-Rhone-Alpes', '', '2024-02-28 08:51:37', '2024-03-04 20:15:08'),
+(25, 37, 'kroco', 'marco', 'rue de la rivi&egrave;re', 'Maison crocodile', '78963', 'aligator', 'Centre-Val de Loire', '', '2024-02-28 08:53:37', '2024-03-04 20:15:08'),
+(26, 38, 'dadou', 'dadou', '8963 rue de Staingrad', 'de^ldpe', '12345', 'mksljzpm', 'Bretagne', '', '2024-02-28 09:09:28', '2024-03-04 20:15:08');
 
 -- --------------------------------------------------------
 
@@ -139,7 +142,7 @@ INSERT INTO `post` (`id`, `user_id`, `title`, `description`, `image`, `create_at
 (44, 14, 'Add new pos t', 'Add new post apr&egrave;s modification des class', 'https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-29 14:56:16', '2024-03-04 14:53:40'),
 (45, 14, 'La rivière tranquille', 'C\'est une rivière très reposante pour une cure de tranquilité.\r\n\r\nUt sit amet magna. Cras a ligula eu urna dignissim viverra. Nullam tempor leo porta ipsum. Praesent purus. Nullam consequat. Mauris dictum sagittis dui. Vestibulum sollicitudin consectetuer', 'https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=600', '2024-02-29 14:57:16', '2024-03-04 14:53:40'),
 (46, 14, 'dedede', 'dedede', 'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600', '2024-02-29 17:00:16', '2024-03-04 14:53:40'),
-(48, 14, 'elle est trop belle', 'Magnifique femme aux cheveux longs.', 'https://images.pexels.com/photos/19399844/pexels-photo-19399844/free-photo-of-femme-debout-jeune-portrait.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', '2024-03-01 08:49:16', '2024-03-04 14:53:40'),
+(48, 14, 'elle est trop belle la rivière', 'la forêt, une rivière la vie ! ', 'https://images.pexels.com/photos/131723/pexels-photo-131723.jpeg?auto=compress&cs=tinysrgb&w=600', '2024-03-01 08:49:16', '2024-03-04 14:53:40'),
 (49, 14, 'Post home diapo 1', 'ljddjakdjazlùdkz*ù', 'https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=600', '2024-03-04 16:21:24', '2024-03-04 16:21:24');
 
 -- --------------------------------------------------------

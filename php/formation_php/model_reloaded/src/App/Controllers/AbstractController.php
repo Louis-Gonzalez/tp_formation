@@ -3,8 +3,10 @@
 // On déclare l'espace de nom
 namespace App\Controllers;
 
-// On déclare la class Controller
+// On appelle les class
+use App\Services\Authenticator;
 
+// On déclare la class Controller
 class AbstractController {
 
     // Déclaration de la fonction "render()"
@@ -12,6 +14,7 @@ class AbstractController {
         // Ouvrir la mémoire tampon du serveur
         // https://www.php.net/manual/en/function.ob-start.php
         ob_start();
+        $auth = Authenticator::class;
         // Extrait les data entrées en paramètre
         // ce qui permettra de les utiliser dans le template directement $post dans le template
         extract($data);

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
     <html lang="fr">
     <head>
@@ -7,6 +9,7 @@
         <link href="./src/assets/css/main.css" rel="stylesheet">
         <title>PHP Objet ! </title>
     </head>
+
 
     <body>
         <!-- header -->
@@ -29,12 +32,15 @@
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page === 'contact') echo  "active"; ?>" aria-current="page" href="?page=contact">Contact</a>
                             </li>
-                            <?php if(isset($_SESSION['user']['roles']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))):?>
+
+                            <!-- (isset($_SESSION['user']['roles']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles'])))  chercher pourqoui $auth ne fonctionne pas à la place App\Services\Authenticator --> 
+                            <?php if(App\Services\Authenticator::isRole('ROLE_MEMBER')):?>
                                 <li class="nav-item ">
                                     <a class="nav-link <?php if($page === 'profil') echo  "active"; ?>" aria-current="page" href="?page=profil_user&id=<?= $_SESSION['user']['id'] ?>">Profil</a>
                                 </li>
                             <?php endif; ?>
-                            <?php if(isset($_SESSION['user']['roles']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))):?>
+                            <!-- (isset($_SESSION['user']['roles']) && in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))) chercher pourqoui $auth ne fonctionne pas à la place App\Services\Authenticator-->
+                            <?php if(App\Services\Authenticator::isRole('ROLE_ADMIN')):?>
                                 <li class="nav-item ">
                                     <a class="nav-link <?php if($page === 'admin') echo  "active"; ?>" aria-current="page" href="?page=adminhome">Admin</a>
                                 </li>

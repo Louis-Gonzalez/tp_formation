@@ -55,4 +55,5 @@ class Router
         // on appelle la methode action()
         $controller->$action();
     }
+
 }

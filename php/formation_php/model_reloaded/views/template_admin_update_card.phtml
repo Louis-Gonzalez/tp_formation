@@ -1,0 +1,23 @@
+<h1>Update card</h1>
+
+<form class="row g-3" action="?page=admintabcard&action=update&id=<?=$post['id']?>" method="POST"> <!-- action renvoie vers la page ciblé  et method= post ne renvoie pas les infos du formulaire dans url  "enctype="multipart/form-data" est obligatoire quand on envoie des inputs de type FILES  pour pouvoir uploader les fichiers-->
+    <div class="col-md-6">
+        <label for="title" class="form-label">Title*</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Add a title" value="<?=$post['title']?>" required>
+    </div>
+    <div class="col-md-6">
+        <label for="description" class="form-label">Description *</label>
+        <textarea maxlength="255" type="text" class="form-control" id="description" name="description" 
+        placeholder="Add a description" required><?=$post['description']?></textarea>
+    </div>
+    <div class="col-md-12">
+        <label for="image" class="form-label">Add your url</label>
+        <input type="text" class="form-control" id="image" name="image" placeholder="Add a picture"  value="<?=$post['image']?>" required>
+    </div>
+    <p>
+        <span class="text-danger">*  required fields</span> 
+    </p>
+    <div class="col-12 mb-4 ">
+        <input type="submit" class="btn btn-success" value="Update Card !">
+    </div>
+</form>

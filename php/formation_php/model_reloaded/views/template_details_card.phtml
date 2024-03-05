@@ -32,7 +32,8 @@
                                 Comments 
                             </button>
                         </li>
-                        <?php if(isset($_SESSION['user']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))): ?>
+                        <!-- (isset($_SESSION['user']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))) -->
+                        <?php if($auth::isRole('ROLE_MEMBER')): ?>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false" tabindex="-1">
                                 Add Comment 
@@ -60,14 +61,14 @@
                                     <!-- boucle du tableau des commentaires -->
                                     <?php foreach($comments as $comment) : ?>
                                     <tr>
-                                        <td><img src="./assets/uploads/avatars/<?= $comment['avatar'] ?>" class="img-fluid" style="height: 30px"></td>
+                                        <td><img src="./src/assets/uploads/avatars/<?= $comment['avatar'] ?>" class="img-fluid" style="height: 30px"></td>
                                         <td><a href="?page=profil_user&id=<?= $comment['author']?>"><?= $comment['firstname'] ?> <?= $comment['lastname'] ?></a></td>
                                         <td><?= $comment['description']?></td>
                                             <!-- ajouter les conditions pour éditer / supprimer -->
                                             <?php if ((isset($_SESSION['user']['roles'])) && (in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles'])) || $comment['author'] == $_SESSION['user']['id'])): ?>
                                             <td>
-                                                <a href="?page=update_comment&id=<?= $post_id?>&comment_id=<?= $comment['comment_id']?>"><img src="./assets/image/pen.png" alt="pen" style="height: 50px"></a>
-                                                <a href="?page=delete_comment&id=<?= $post_id?>&comment_id=<?= $comment['comment_id']?>"><img src="./assets/image/trash-been.png" alt="trash-been" style="height: 30px"></a>
+                                                <a href="?page=update_comment&id=<?= $post_id?>&comment_id=<?= $comment['comment_id']?>"><img src="./src/assets/image/pen.png" alt="pen" style="height: 50px"></a>
+                                                <a href="?page=delete_comment&id=<?= $post_id?>&comment_id=<?= $comment['comment_id']?>"><img src="./src/assets/image/trash-been.png" alt="trash-been" style="height: 30px"></a>
                                             </td>
                                             <?php endif; ?>
                                     </tr>
@@ -76,7 +77,7 @@
                         </div>
                         <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                             <div class="mt-3">
-                                <form action="?page=details_card&id=<?= $post_id?>" method="POST">
+                                <form action="?page=details&action=add_comment&id=<?= $post_id?>" method="POST">
                                     <div class="col-md-6">
                                         <label for="comment" class="form-label m-2">Comment*</label>
                                         <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Add a comment" required></textarea>

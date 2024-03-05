@@ -10,7 +10,6 @@ use App\Models\Post;
 use App\Services\DataBase;
 
 // On déclare la class PostManager
-
 class PostManager extends AbstractManager
 {
     public function __construct(){

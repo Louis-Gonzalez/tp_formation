@@ -27,27 +27,23 @@ class Post extends  AbstractTable
     {
         $this->title = $title;
     }
-
     public function setDescription(?string $description) : void
     {
         $this->description = $description;
     }
-
     public function setImage(?string $image) : void
     {
         $this->image = $image;
     }
-
-    public function setUpdate_at() : void
-    {
-        $this->update_at = date("Y-m-d H:i:s");
-    }
-
     public function setCreate_at() : void
     {
         $this->create_at = date("Y-m-d H:i:s");
     }
-    // On crée une fonction qui retourne un tableau de tous les champs de la table post
+    public function setUpdate_at() : void
+    {
+        $this->update_at = date("Y-m-d H:i:s");
+    }
+    // On crée une fonction qui retourne un tableau de tous les champs de la table 'post'
     public function toArray() 
     {
         $postArray = [

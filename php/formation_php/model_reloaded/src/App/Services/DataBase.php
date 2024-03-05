@@ -76,7 +76,10 @@ class Database {
         public function query($statement, $params = []){
             $sql = $this->getPDO()->prepare($statement);
             $sql->execute($params);
+
+            return $this->getPDO();
         }
+
 
 }
 

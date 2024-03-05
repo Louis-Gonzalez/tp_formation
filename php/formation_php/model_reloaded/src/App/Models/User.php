@@ -10,6 +10,7 @@ use App\Services\DataBase;
 class User extends AbstractTable
 {
     protected ?string $email=null;
+    protected ?string $avatar=null;
     protected ?string $password=null;
     protected ?string $roles=null;
     private ?string $register_at=null;

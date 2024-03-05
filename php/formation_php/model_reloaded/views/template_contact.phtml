@@ -1,0 +1,93 @@
+<h1>Contact</h1> <!-- http://localhost/formation_php/tp3/?page=contact -->
+
+<p>
+    Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. 
+    Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. 
+    Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. 
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. 
+    Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, 
+    augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna. 
+</p>
+
+<?php if (isset($errors) && !empty($errors)): // si l'erreur existe et que le tableau d'erreurs n'est pas vide // on affiche les erreurs
+        foreach ($errors as $error): ?>   
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?> 
+</div>
+
+<?php endforeach;?> <!-- on ferme la boucle foreach -->
+<?php endif;?>
+
+
+<?php if ($isfinish): ?> <!-- si $isfinish est true on affiche ce message -->
+    <div class="alert alert-success" role="alert">
+        <p>Merci pour votre inscription avec le mail suivant <?= $email ?> !</p>
+        <p>Vous pouvez vous connecter <a href="?page=login">Login</a></p>
+    </div>
+    
+<?php else : ?>
+
+<form class="row g-3" action="?page=contact" method="POST"> <!-- action renvoie vers la page ciblé  et method= post ne renvoie pas les infos du formulaire dans url -->
+    <div class="col-md-6">
+        <label for="firstname" class="form-label">Firstname *</label>
+        <input type="text" class="form-control" id="firstname" name="firstname" required>
+    </div>
+    <div class="col-md-6">
+        <label for="lastname" class="form-label">Lastname *</label>
+        <input type="text" class="form-control" id="lastname" name="lastname" required>
+    </div>
+    <div class="col-12">
+        <label for="address1" class="form-label">Address1 *</label>
+        <input type="text" class="form-control" id="address1" placeholder="Apartment, studio, or floor" name="address1" required>
+    </div>
+    <div class="col-12">
+        <label for="address2" class="form-label">Address2 *</label>
+        <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor" name="address2" required>
+    </div>
+    <div class="col-md-2">
+        <label for="zip" class="form-label">Zip *</label>
+        <input type="text" class="form-control" id="zip" name="zip" required>
+    </div>
+    <div class="col-md-4">
+        <label for="city" class="form-label">City *</label>
+        <input type="text" class="form-control" id="city" name="city" required>
+    </div>
+    <div class="col-md-6">
+        <label for="state" class="form-label">State *</label>
+        
+        <select id="state" class="form-select" name="state" required> <!-- création du menu deroulant--> 
+            <option selected> Choose.... *</option> 
+            <?php foreach($state as $value):?> <!-- choix de l'option via une boucle forech qui parcours le tableau --> 
+                <option><?php echo $value ?></option> <!-- affichage de la value de l'option on peut écrire aussi ?= pour l'équivalant de ?php echo--> 
+            <?php endforeach ?> <!-- attention penser à fermer la boucle foreach --> 
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="email" class="form-label">Email *</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="col-md-6">
+        <label for="password" class="form-label">Password *</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <div class="col-12 mb-4">
+        <label for="message" class="form-label">Message *</label>
+        <textarea type="text" class="form-control" id="message" name="message" required></textarea>
+    </div>
+    <p>
+        <span class="text-danger">*  champs obligatoires</span> 
+    </p>
+        <div class="col-md-6">
+            <div class="form-check mb-4" >
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck" name="checkbox" required>
+                    I agree with your rules !
+                </label>
+            </div>
+        </div>
+    <div class="col-12 mb-4 ">
+        <button type="submit" class="btn btn-primary">Send me</button>
+    </div>
+</form>
+<?php endif;?>

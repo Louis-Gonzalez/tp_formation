@@ -1,6 +1,7 @@
 <h1><?= CONFIG_SITE_TITLE ?></h1> <!-- http://localhost/formation_php/tp3/?page=home -->
 
-<?php if(isset($_SESSION['user']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))): ?>
+<!-- (isset($_SESSION['user']) && in_array('ROLE_MEMBER', json_decode($_SESSION['user']['roles']))) -->
+<?php if($auth::isRole('ROLE_MEMBER')): ?>
     <p>
         Welcome Dear <strong><?= $_SESSION['user']['firstname'] ?> <?= $_SESSION['user']['lastname'] ?></strong> <!-- affichage conditionnel d'être au moins au role de membre -->
     </p>
