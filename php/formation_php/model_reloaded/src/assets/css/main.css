@@ -31,20 +31,21 @@ textarea {
 }
 .admin-home{
     display: flex;
-    justify-content: space-around;
-    margin: 2rem;
-    padding: 1rem;
+    justify-content:space-around;
+    margin: 0rem;
+    padding: 0rem;
 }
 .create-user,
 .update-user,
 .create-card{
     display: flex;
-    flex-direction: column;
+    flex-direction: wrap;
     text-align: center;
     border: solid 1px black;
     background-color: cadetblue;
     padding: 1rem;
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-right: 12rem;
     width: 25rem;
     height: auto; 
 }

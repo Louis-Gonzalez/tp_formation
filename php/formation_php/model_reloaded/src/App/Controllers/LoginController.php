@@ -20,29 +20,21 @@ class LoginController extends AbstractController
             $email = htmlentities(strip_tags($_POST['email'])); // on sécurise le champs
             $auth = new Authenticator();
             if($auth->login($email,$password)){
-                header("Location: ?page=admin");
+
+                if(isset($_POST['remember_me'])){
+                    // ceci permet de transformer un tableau en chaine de caractères et son inverse "unserialize" chaine -> tableau
+                    $cookieData = serialize($_SESSION['user']); 
+                    setcookie(CONFIG_COOKIE_NAME,$cookieData, time()+3600);
+                }
+                header("Location: ?page=home");
                 die();
             }
             $errors[] = "Problème d'authentification !";
-        
         }
         $template = './views/template_login.phtml';
+        $this->render($template, ['errors' => $errors]);
+    }
 
-        $this->render($template,['errors' => $errors]);
-    }
-    
-    public function render($templatePath, $data){
-        // Ouvrir la mémoire tampon du serveur
-        // https://www.php.net/manual/en/function.ob-start.php
-        ob_start();
-        // Inclure le fichier de template
-        include $templatePath;
-        // On charge la mémoire tampon dans le template
-        // https://www.php.net/manual/en/function.ob-get-clean.php
-        $template = ob_get_clean();
-        // Afficher le template avec les data entrées en param.Xrations et qui le chemin de "$template"
-        include './views/base.phtml';
-    }
 
 
 }

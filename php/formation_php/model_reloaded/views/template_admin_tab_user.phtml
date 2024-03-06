@@ -1,0 +1,63 @@
+<h1>Create, Update and Delete  a user</h1>
+
+
+<form class="d-flex" role="search" >
+    <div class="add-post">
+        <a class="btn btn-success" href="?page=admintabuser&action=createuser">Add User</a>
+    </div>
+    <input name="page" value="admintabuser" type="hidden"> <!-- pour chercher dans la passe ciblé dans value-->
+    <input name="action" value="search" type="hidden">
+    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Avatar</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Register_at</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php 
+    foreach($users as $user) : ?>
+        <tr>
+            <td scope="row">
+                <?=$user['id']?>
+            </td>
+            <td>
+                <?=$user['email']?>
+            </td>
+            <td>
+                <img src="./assets/uploads/avatars/<?=$user['avatar']?>" alt="" width="50px">
+            </td>
+            <td>
+                <?=$user['roles']?>
+            </td>
+            <td>
+                <?=$user['register_at']?>
+            </td>
+            <td>
+                <a class="btn btn-danger m-2" href="javascript:deleteUser(<?=$user['id']?>)">Delete</a>
+                <a class="btn btn-primary m-2" href="?page=admin&action=updateUser&id=<?=$user['id']?>">Update</a>
+                <a class="btn btn-warning m-2" href="?page=profil&action=showprofil&id=<?=$user['id']?>">Show profil</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<script>
+    function deleteUser(id){ // on crée une fonction suppression avec l'id et une fenetre de contrôle
+        // on affiche une fenetre de contrôle
+        const question = window.confirm("Are you sure you want to delete this user" + id +"?");
+        // fait l'action de supprimer 
+        if (question === true){
+            window.location.href = "?page=admintabuser&action=deleteuser&id="+ id;
+        }
+    }
+</script>

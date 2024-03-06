@@ -34,8 +34,8 @@
                     Autor: <strong><?= $article['firstname'] ?> <?= $article['lastname'] ?></strong>
                 </p>
                 <a href="?page=details&id=<?= $article['id']?>" class="btn btn-primary">Read more</a>
+                <button class="btn btn-info" type="button" onclick="addWishList(<?= $article['id'] ?>)">Add WishList</button>
                 <div class="mt-2">
-                    <button class="btn btn-info" type="button" onclick="addWishList(<?= $article['id'] ?>)">Add WishList</button>
                     <label class="form-check-label" for="rember_me"></label>
                 </div>
             </div>

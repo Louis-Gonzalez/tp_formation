@@ -13,6 +13,13 @@ class Authenticator {
     public function __construct()
     {
         if(!isset($_SESSION)) session_start();
+        // si on trouve un cookie qui porte le nom définis dans la config 
+        // Alors on crée une session à partir des infos du cookie
+        if(isset($_COOKIE[CONFIG_COOKIE_NAME]) && !empty($_COOKIE[CONFIG_COOKIE_NAME])){
+            $cookieData = unserialize($_COOKIE[CONFIG_COOKIE_NAME]);
+            // On appel la fonction setSession avec les infos du cookie
+            $this->setSession($cookieData);
+        }
     }
 
     private function setSession($userData)
@@ -39,6 +46,9 @@ class Authenticator {
     }
     public function logout()
     {
+        if(isset($_COOKIE[CONFIG_COOKIE_NAME])){
+            setcookie(CONFIG_COOKIE_NAME, '', time() - 1);
+        }
         session_destroy();
     }
     // On declare la fonction qui test le rôle et la met en static pour pouvoir l'utiliser de partout

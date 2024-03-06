@@ -43,7 +43,7 @@ class ContactController extends AbstractController
                 "Martinique",
                 "Mayotte",
                 "Reunion"
-        ];
+            ];
             $title = "This page is Contact !";
 
             ///////////////////////////////////// LOGIQUE ///////////////////////////////////////

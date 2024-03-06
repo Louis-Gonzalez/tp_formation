@@ -1,0 +1,77 @@
+<h1>Profil</h1> <!-- http://localhost/formation_php/tp3/?page=contact -->
+
+<div class="titre-profil">
+    <div>
+        <img src="./src/assets/uploads/avatars/<?= $contact['avatar']?>" alt="avatar"/>
+    </div>
+    <div>
+        <p>Ton profil utilisateur du site <?= CONFIG_SITE_TITLE ?></p>
+    </div>
+</div>
+
+<?php if (isset($errors) && !empty($errors)): // si l'erreur existe et que le tableau d'erreurs n'est pas vide // on affiche les erreurs
+        foreach ($errors as $error): ?>   
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?> 
+</div>
+
+
+<?php endforeach;?> <!-- on ferme la boucle foreach -->
+<?php endif;?>
+
+<div class="row g-3" action="?page=profil&id=<?= $_SESSION['user']['id'] ?>" method="POST"> <!-- action renvoie vers la page ciblé  et method= post ne renvoie pas les infos du formulaire dans url -->
+    <div class="col-md-6">
+        <p>
+            Firstname : <?= $contact['firstname'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Lastname : <?= $contact['lastname'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Register_at : <?= $contact['register_at'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Update_at : <?= $contact['update_at'] ?>
+        </p>
+    </div>
+    <div class="col-6">
+        <p>
+            Email : <?= $contact['email'] ?>
+        </p>
+    </div>
+    <div class="col-6">
+        <p>
+            Roles: <?= $contact['roles'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Address1 : <?= $contact['address1'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Address2 : <?= $contact['address2'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Zip : <?= $contact['zip'] ?>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            City : <?= $contact['city'] ?>
+        </p>
+    </div>
+    <div class="col-md-12 text-center">
+        <a href="?page=home" class="btn btn-warning">Exit</a>
+    </div>
+</div>

@@ -14,4 +14,6 @@ const DB_PORT = 3306;
 const DB_USER = "root";
 const DB_PASS = "";
 
+const CONFIG_COOKIE_NAME = "Mon_super_cookie_OPP";
+
 ?>
