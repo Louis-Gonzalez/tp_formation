@@ -122,19 +122,27 @@ class AdminTabUserController extends AbstractController
     {
         // on récupère le id
         $user_id = (int) $_GET['id'];
-
         // on supprime les commentaires de l'utilisateur (comment enfant du post qui enfant user )
         $manager = new CommentManager(); 
-        // $deleteComments = $manager->deleteCommentsByUser($user_id);
-
-        // deleteComments($post_id)
-        // $deleteComment = $manager->deleteComments($user_id);
-
-
+        $deleteComments = $manager->deleteQuery(
+                                                    "DELETE FROM comment 
+                                                    WHERE user_id = ?", 
+                                                    [$user_id]
+                                                );
         // on supprime le post ensuite (post enfant de user)
         $manger = new PostManager();
-        $delete = $manger->delete($user_id);
-        
+        $deletePosts = $manger->deleteQuery(
+                                                "DELETE FROM post
+                                                WHERE user_id = ?",
+                                                [$user_id]
+                                            );
+        // on supprime le contact (contact enfant de user)
+        $manager = new ContactManager();
+        $deleteContact = $manager->deleteQuery(
+                                                    "DELETE FROM contact 
+                                                    WHERE user_id = ?", 
+                                                    [$user_id]
+                                                );
         // on supprime le user 
         $manager = new UserManager();
         $id = $user_id;
@@ -142,10 +150,86 @@ class AdminTabUserController extends AbstractController
         header ('Location: ?page=admintabuser');
     }
 
+    // On met à jour un utiliseur
     public function updateUser()
     {
+        $state = [ // déclaration du tableau du menu déroulant state
+            "Auvergne-Rhone-Alpes",
+            "Bourgogne-Franche-Comte",
+            "Bretagne",
+            "Centre-Val de Loire",
+            "Corse",
+            "Grand Est",
+            "Hauts-de-France",
+            "Ile-de-France",
+            "Normandie",
+            "Nouvelle-Aquitaine",
+            "Occitanie",
+            "Pays de la Loire",
+            "Provence Alpes Cote d Azur",
+            "Guadeloupe",
+            "Guyane",
+            "Martinique",
+            "Mayotte",
+            "Reunion"
+        ];
+        $roles = [ // déclaration du tableau du menu déroulant roles
+            "ROLE_MEMBER",
+            "ROLE_ADMIN"
+        ];
+        // on recupère le id de l'utilisateur
+        $id = (int) $_GET['id'];
+        $manager = new UserManager();
+        $user = $manager->getAllBy(
+                                    "SELECT * FROM user
+                                    inner join contact
+                                    on user.id = contact.user_id 
+                                    WHERE user.id = " .   $id);
+        var_dump($_POST);
+
+        // on recupère les informations de l'utilisateur et on les vérifie
+        if(isset($_POST['email']) && isset($_FILES['avatar']) && isset($_POST['roles']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['address1']) && isset($_POST['address2']) && isset($_POST['zip']) && isset($_POST['city']) && isset($_POST['state'])
+
+        && !empty($_POST['email']) && !empty($_FILES['avatar']) && !empty($_POST['roles']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['address1']) && !empty($_POST['address2']) && !empty($_POST['zip']) && !empty($_POST['city']) && !empty($_POST['state']))
+        {
+            $email = Utils::cleaner($_POST['email']);
+            $avatar = $_FILES['avatar']['name']; // avatar = $_FILES
+            $password = $user['password'];
+            // gestion du role d'utilisateur
+            $roles = [];
+            $roles[] = Utils::cleaner($_POST['roles']);
+            // si le role ADMIN est sélectionné alors on lui ajoute le role MEMBER
+            if (in_array("ROLE_ADMIN", $roles)) {
+                $roles[] = "ROLE_MEMBER";
+            }
+            $roles = json_encode($roles); // on transforme le tableau en chaine de caractères
+            $firstname = Utils::cleaner($_POST['firstname']);
+            $lastname = Utils::cleaner($_POST['lastname']);
+            $address1 = Utils::cleaner($_POST['address1']);
+            $address2 = Utils::cleaner($_POST['address2']);
+            $zip = Utils::cleaner($_POST['zip']);
+            $city = Utils::cleaner(strip_tags($_POST['city']));
+            $state = Utils::cleaner(strip_tags($_POST['state']));
+            $update_at = date('Y-m-d H:i:s');
+            $user_id = $id;
+            if ((!filter_var($email, FILTER_VALIDATE_EMAIL))){ // ici on utlise la fonctionne filter_var pour la vérification de l'émail
+                $errors[] = "Veuillez rensigner une adresse email valide svp"; // message de débug si l'email n'est pas valide
+            }
+            $manager = new UserManager();
+            $update = $manager->update( $id, [$email, $avatar, $password, $roles, $update_at]);
+            $manager = new ContactManager();
+            $update = $manager->updateQuery( "UPDATE contact
+                                                SET firstname = ?, lastname = ?, address1 = ?, address2 = ?, zip = ?, city = ?, state = ?, update_at = ?
+                                                WHERE user_id = ?", [$firstname, $lastname, $address1, $address2, $zip, $city, $state, $update_at, $user_id]);
+            header('Location: ?page=admintabuser');
+        }
+        
         $template = './views/template_admin_update_user.phtml';
-        $this->render($template,[]);
+        $this->render($template,[
+                                    'user' => $user,
+                                    'state' => $state,
+                                    'roles' => $roles
+                                ]);
     }
     public function search()
     {

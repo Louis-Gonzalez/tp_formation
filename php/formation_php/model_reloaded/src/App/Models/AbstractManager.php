@@ -78,6 +78,17 @@ abstract class AbstractManager
         $update = self::$db->query("UPDATE ".self::$tableName." SET ".$str_values." WHERE id='".$id."'",$data);
         return $update;
     }
+    // On met à jour des données dans la base de données avec une requête avec des paramètres
+    public function updateQuery($query = null, $params = []){
+        $query = self::$db->query($query, $params);
+        return $query;
+    }
+
+    // On supprime des données dans la base de données avec une requête avec des paramètres
+    public function deleteQuery($query = null, $params = []){
+        $query = self::$db->query($query, $params);
+        return $query;
+    }
 }
 
 ?>

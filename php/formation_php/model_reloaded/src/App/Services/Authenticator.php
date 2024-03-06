@@ -20,6 +20,9 @@ class Authenticator {
             // On appel la fonction setSession avec les infos du cookie
             $this->setSession($cookieData);
         }
+        // Quel est le choix de l'utilisateur par rapport aux cookies ?
+        if(isset($_POST['cookie_yes'])) $_SESSION['cookie'] = true;
+        if(isset($_POST['cookie_no'])) $_SESSION['cookie'] = false;
     }
 
     private function setSession($userData)
